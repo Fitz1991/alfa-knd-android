@@ -16,6 +16,10 @@ before_script:
   # make gradle executable
   - chmod +x ./gradlew
 
+stages:
+  - build
+  - test
+
 build:
   stage: build
   script:
