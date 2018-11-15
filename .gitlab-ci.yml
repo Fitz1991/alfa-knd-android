@@ -17,8 +17,12 @@ before_script:
   - chmod +x ./gradlew
 
 
+test:
+  stage: test
+  script:
+     - ./gradlew check
 
-build:
+build-debug:
   stage: build
   script:
      - ./gradlew assembleDebug
@@ -26,7 +30,19 @@ build:
     paths:
       - app/build/outputs/apk/
 
-test:
-  stage: test
+build:
+  stage: build
   script:
-     - ./gradlew check
+     - ./gradlew assemble
+  artifacts:
+    paths:
+      - app/build/outputs/apk/
+
+build-release:
+  stage: build
+  script:
+     - ./gradlew assembleRelease
+  artifacts:
+    paths:
+      - app/build/outputs/apk/
+
