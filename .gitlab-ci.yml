@@ -29,6 +29,7 @@ build:
   artifacts:
     paths:
       - app/build/outputs/apk/
+  allow_failure: false
   when: manual
 
 
