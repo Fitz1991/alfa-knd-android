@@ -25,3 +25,8 @@ build:
   artifacts:
     paths:
       - app/build/outputs/apk/
+
+test:
+  stage: test
+  script:
+     - ./gradlew check
