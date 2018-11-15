@@ -16,33 +16,12 @@ before_script:
   # make gradle executable
   - chmod +x ./gradlew
 
-
-test:
-  stage: test
-  script:
-     - ./gradlew check
-
-build-debug:
-  stage: build
-  script:
-     - ./gradlew assembleDebug
-  artifacts:
-    paths:
-      - app/build/outputs/apk/
-
 build:
   stage: build
   script:
      - ./gradlew assemble
-  artifacts:
-    paths:
-      - app/build/outputs/apk/
-
-build-release:
-  stage: build
-  script:
+     - ./gradlew assembleDebug
      - ./gradlew assembleRelease
   artifacts:
     paths:
       - app/build/outputs/apk/
-
