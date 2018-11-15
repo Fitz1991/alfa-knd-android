@@ -1,4 +1,4 @@
-image: registry.gitlab.com/hardysim/android-ci:latest
+image: ksb-dev.keysystems.local:4567/ksb/android-ci:28.0.3
 
 cache:
   paths:
