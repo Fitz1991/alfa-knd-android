@@ -25,6 +25,8 @@ build:
   artifacts:
     paths:
       - app/build/outputs/apk/
+  when: manual
+
 
 test:
   stage: test
