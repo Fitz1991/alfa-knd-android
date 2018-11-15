@@ -1,13 +1,21 @@
-image: javiersantos/android-ci:28.0.3
-
-before_script:
-    - export GRADLE_USER_HOME=`pwd`/.gradle
-    - chmod +x ./gradlew
+image: registry.gitlab.com/hardysim/android-ci:latest
 
 cache:
-  key: "$CI_COMMIT_REF_NAME"
   paths:
-     - .gradle/
+  - .gradle/wrapper
+  - .gradle/caches
+  - .android/build-cache/
+
+
+before_script:
+  # move gradle-cache and android-build-cache to folders inside the build-folder so it can be used by the GitLab CI cache
+  # http://stackoverflow.com/a/36050711/2170109
+  # https://developer.android.com/studio/build/build-cache.html
+  - export GRADLE_USER_HOME=.gradle
+  - export ANDROID_SDK_HOME=$CI_PROJECT_DIR
+  # make gradle executable
+  - chmod +x ./gradlew
+
 
 stages:
   - build
@@ -19,3 +27,8 @@ build:
   artifacts:
     paths:
       - app/build/outputs/apk/
+
+test:
+  stage: test
+  script:
+     - ./gradlew check
