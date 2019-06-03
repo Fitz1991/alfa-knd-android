@@ -3,23 +3,22 @@
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="horizontal">
+		android:layout_height="match_parent">
 
 	<!--Master fragment-->
 	<fragment
 			android:name="ru.npc_ksb.alfaknd.fragments.MasterFragment"
 			android:layout_width="220dp"
 			android:layout_height="match_parent"
-			android:id="@+id/fragment_master"
-			>
+			android:id="@+id/fragment_master">
 	</fragment>
 
 	<!--Detail layout -->
 	<FrameLayout
 			android:layout_width="1000dp"
 			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:layout_marginStart="56dp">
+			android:layout_marginLeft="56dp"
+			android:background="@color/colorLinen">
 	</FrameLayout>
 </android.support.v4.widget.SlidingPaneLayout>
+
