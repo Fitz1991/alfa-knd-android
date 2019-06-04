@@ -7,11 +7,11 @@ class Application: Application() {
     companion object {
         private var appContext: Context? = null
 
-        fun getContext() = appContext!!
+        fun getAppContext() = appContext!!
     }
 
     override fun onCreate() {
-        // appContext = applicationContext
+        appContext = applicationContext
 
         super.onCreate()
     }

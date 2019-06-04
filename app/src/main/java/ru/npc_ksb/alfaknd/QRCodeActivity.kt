@@ -6,12 +6,14 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.google.zxing.Result
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import me.dm7.barcodescanner.zxing.ZXingScannerView.ResultHandler
+import okhttp3.*
+import java.io.IOException
 
 class QRCodeActivity : AppCompatActivity(), ResultHandler {
     companion object {
@@ -76,7 +78,26 @@ class QRCodeActivity : AppCompatActivity(), ResultHandler {
     }
 
     override fun handleResult(result: Result) {
-        Log.d("qwerty", result.text)
-        this.scannerView?.resumeCameraPreview(this)
+        val activity = this
+
+        val client = OkHttpClient()
+
+        val request = Request.Builder().url("http://ya.ru").get().build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call : Call, e : IOException) {
+                Log.d("qwerty", e.message)
+                call.cancel()
+            }
+
+            @Throws(IOException::class)
+            override fun onResponse(call : Call, response : Response) {
+                val data = response.body()?.string()
+                Log.d("qwerty", result.text)
+                Log.d("qwerty", data)
+
+                activity.scannerView?.resumeCameraPreview(activity)
+            }
+        })
     }
 }
