@@ -1,6 +1,6 @@
-package ru.npc_ksb.alfaknd;
+package ru.npc_ksb.alfaknd
 
-public enum MenuActionItem {
+enum class MenuActionItem {
     ITEM1,
     ITEM2,
     ITEM3,
