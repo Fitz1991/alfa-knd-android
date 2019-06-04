@@ -3,17 +3,13 @@ package ru.npc_ksb.alfaknd
 import android.os.Build
 import android.os.Bundle
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
-import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log
-import android.widget.Toast
 import com.google.zxing.Result
 
-import kotlinx.android.synthetic.main.activity_qrcode.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import me.dm7.barcodescanner.zxing.ZXingScannerView.ResultHandler
 
@@ -37,7 +33,6 @@ class QRCodeActivity : AppCompatActivity(), ResultHandler {
 
         this.scannerView = ZXingScannerView(this)
 
-        // setContentView(R.layout.activity_qrcode)
         setContentView(this.scannerView)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
