@@ -19,6 +19,12 @@
 			android:layout_height="match_parent"
 			android:layout_marginLeft="56dp"
 			android:background="@color/colorLinen">
+
+        <Button
+                android:text="Button"
+                android:layout_width="101dp"
+                android:layout_height="65dp" tools:layout_editor_absoluteY="126dp"
+                tools:layout_editor_absoluteX="62dp" android:id="@+id/button" android:onClick="onQRCodeClick"/>
 	</FrameLayout>
 </android.support.v4.widget.SlidingPaneLayout>
 

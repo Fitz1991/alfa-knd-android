@@ -12,7 +12,7 @@
 	<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:orientation="vertical">
+			android:orientation="vertical" android:id="@+id/linearLayout">
 
 		<android.support.v7.widget.Toolbar
 				android:id="@+id/toolbar"
@@ -25,11 +25,11 @@
 		<android.support.v4.widget.DrawerLayout
 				android:id="@+id/drawer_layout"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent" >
+				android:layout_height="match_parent">
 
-			<include layout="@layout/content_main_margin_left" />
+			<include layout="@layout/content_main_margin_left"/>
 
-	</android.support.v4.widget.DrawerLayout>
+		</android.support.v4.widget.DrawerLayout>
 	</LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
