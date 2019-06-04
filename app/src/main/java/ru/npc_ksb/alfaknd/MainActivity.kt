@@ -12,8 +12,6 @@ import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import ru.npc_ksb.alfaknd.models.DB
-import ru.npc_ksb.alfaknd.models.Test
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -33,12 +31,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-
-        DB.init(this)
-
-        Test.addName("name1")
-        Test.addName("name2")
-        Test.getNames()
     }
 
     override fun onBackPressed() {

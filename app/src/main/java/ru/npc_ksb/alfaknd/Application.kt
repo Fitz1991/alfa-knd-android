@@ -2,7 +2,6 @@ package ru.npc_ksb.alfaknd
 
 import android.app.Application
 import android.content.Context
-import ru.npc_ksb.alfaknd.db.Database
 
 class Application: Application() {
     companion object {
@@ -12,9 +11,7 @@ class Application: Application() {
     }
 
     override fun onCreate() {
-        appContext = applicationContext
-
-        val db = Database(appContext!!)
+        // appContext = applicationContext
 
         super.onCreate()
     }
