@@ -14,6 +14,9 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 import me.dm7.barcodescanner.zxing.ZXingScannerView.ResultHandler
 import okhttp3.*
 import java.io.IOException
+import okhttp3.RequestBody
+
+
 
 class QRCodeActivity : AppCompatActivity(), ResultHandler {
     companion object {
@@ -82,21 +85,34 @@ class QRCodeActivity : AppCompatActivity(), ResultHandler {
 
         val client = OkHttpClient()
 
-        val request = Request.Builder().url("http://ya.ru").get().build()
+        val JSON = MediaType.parse("application/json; charset=utf-8")
+        val body = RequestBody.create(JSON, """{ "token": "${result.text}" }""")
+        val request = Request.Builder().url("http://192.168.43.39:3000/api/account/device-login/")
+            .addHeader("_csrftoken", Application.csrfTokenHeader)
+            .post(body)
+            .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call : Call, e : IOException) {
                 Log.d("qwerty", e.message)
                 call.cancel()
+
+                activity.scannerView?.resumeCameraPreview(activity)
             }
 
             @Throws(IOException::class)
             override fun onResponse(call : Call, response : Response) {
-                val data = response.body()?.string()
-                Log.d("qwerty", result.text)
-                Log.d("qwerty", data)
+                val cookies = response.headers().values("set-cookie")
+                val pattern = "_sessionid=([^;]+)".toRegex()
+                cookies.forEach { cookie ->
+                    val found = pattern.find(cookie)
+                    if (found != null) {
+                        Application.sessionIdHeader = found.groups[1]!!.value
+                        Log.d("qwerty", "session: ${Application.sessionIdHeader}")
+                    }
+                }
 
-                activity.scannerView?.resumeCameraPreview(activity)
+                activity.finish()
             }
         })
     }

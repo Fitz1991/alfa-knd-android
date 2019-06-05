@@ -7,7 +7,8 @@ import java.io.IOException
 
 class Application: Application() {
     companion object {
-        var csrfToken = ""
+        var csrfTokenHeader = ""
+        var sessionIdHeader = ""
     }
 
     fun getCsrfToken(callback: (token : String) -> Unit) {
@@ -25,16 +26,21 @@ class Application: Application() {
             override fun onResponse(call : Call, response : Response) {
                 val headers = response.headers().toString()
                 Log.d("qwerty", headers)
-                val cookie = response.header("set-cookie")
+                val cookies = response.headers().values("set-cookie")
                 val pattern = "_csrftoken=([^;]+)".toRegex()
-                val found = pattern.find(cookie)
-                callback(found!!.groups[1]!!.value)
+                cookies.forEach { cookie ->
+                    val found = pattern.find(cookie)
+                    if (found != null) {
+                        callback(found.groups[1]!!.value)
+                    }
+                }
             }
         })
     }
 
     override fun onCreate() {
         getCsrfToken { token ->
+            csrfTokenHeader = token
             Log.d("qwerty", "token: $token")
         }
 
