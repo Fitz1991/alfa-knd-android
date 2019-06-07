@@ -9,16 +9,16 @@
 
 	<ImageView
 			android:id="@+id/menu_item_image_view"
-			android:layout_width="24dp"
-			android:layout_height="24dp"
-			android:layout_marginRight="16dp"
-			android:contentDescription="@android:string/ok"/>
+			android:layout_width="20dp"
+			android:layout_height="20dp"
+			android:layout_marginRight="10dp"
+			android:contentDescription="@android:string/ok" android:layout_marginLeft="10dp"/>
 
 	<TextView
 			android:id="@+id/menu_item_text_view"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="16sp"
-			android:textColor="@android:color/white"/>
+			android:textColor="@android:color/white" android:layout_marginLeft="17dp"/>
 
 </LinearLayout>
