@@ -1,32 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SlidingPaneLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:id="@+id/sliding_pane_layout"
-		>
+		android:layout_marginStart="73dp"
+		android:background="@color/colorLinen">
 
-	<!--Master fragment-->
-	<fragment
-			android:name="ru.npc_ksb.alfaknd.fragments.MasterFragment"
-			android:layout_width="220dp"
-			android:layout_height="match_parent"
-			android:clickable="true">
-	</fragment>
-
-	<!--Detail layout -->
-	<android.support.constraint.ConstraintLayout
-			android:layout_width="1000dp"
-			android:layout_height="match_parent"
-			android:layout_marginLeft="73dp"
-			android:background="@color/colorLinen">
-
-		<Button
-				android:text="Button"
-				android:layout_width="101dp"
-				android:layout_height="65dp" tools:layout_editor_absoluteY="16dp"
-				tools:layout_editor_absoluteX="275dp" android:id="@+id/button" android:onClick="onQRCodeClick"/>
-	</android.support.constraint.ConstraintLayout>
-</android.support.v4.widget.SlidingPaneLayout>
-
+    <Button
+            android:text="Button"
+            android:layout_width="101dp"
+            android:layout_height="65dp" tools:layout_editor_absoluteY="219dp"
+            tools:layout_editor_absoluteX="193dp" android:id="@+id/button" android:onClick="onQRCodeClick"
+            android:layout_y="149dp" android:layout_x="123dp"/>
+    <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="451dp"
+            tools:layout_editor_absoluteX="144dp" android:id="@+id/button2" android:layout_y="38dp"
+            android:layout_x="31dp"/>
+</AbsoluteLayout>
