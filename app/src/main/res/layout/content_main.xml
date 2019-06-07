@@ -4,22 +4,29 @@
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:orientation="horizontal">
+		android:id="@+id/sliding_pane_layout"
+		>
 
 	<!--Master fragment-->
 	<fragment
 			android:name="ru.npc_ksb.alfaknd.fragments.MasterFragment"
 			android:layout_width="220dp"
 			android:layout_height="match_parent"
-			android:id="@+id/fragment_master"
-			>
+			android:clickable="true">
 	</fragment>
 
 	<!--Detail layout -->
-	<FrameLayout
+	<android.support.constraint.ConstraintLayout
 			android:layout_width="1000dp"
 			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:layout_marginStart="56dp">
-	</FrameLayout>
+			android:layout_marginLeft="73dp"
+			android:background="@color/colorLinen">
+
+		<Button
+				android:text="Button"
+				android:layout_width="101dp"
+				android:layout_height="65dp" tools:layout_editor_absoluteY="16dp"
+				tools:layout_editor_absoluteX="275dp" android:id="@+id/button" android:onClick="onQRCodeClick"/>
+	</android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.SlidingPaneLayout>
+

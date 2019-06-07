@@ -13,7 +13,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v4.widget.SlidingPaneLayout
 import android.util.Log
 import android.view.View
-import kotlinx.android.synthetic.main.content_main_margin_left.*
+import kotlinx.android.synthetic.main.content_main.*
 import ru.npc_ksb.alfaknd.fragments.MasterFragment
 import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        //val navView: FragmentActivity = findViewById(R.id.fragment_master)
+        //val navView: FragmentActivity = findViewById(R.id.content_menu)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 

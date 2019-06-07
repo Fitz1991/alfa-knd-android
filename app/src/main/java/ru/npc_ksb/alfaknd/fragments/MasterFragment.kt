@@ -13,7 +13,7 @@ import ru.npc_ksb.alfaknd.R
 
 class MasterFragment : ListFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_master, container)
+        val view = inflater.inflate(R.layout.content_menu, container)
 
         this.listAdapter = MenuListAdapter(R.layout.row_menu_action_item, this.activity, MenuActionItem.values())
 
