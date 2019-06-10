@@ -17,12 +17,12 @@
             app:showAsAction="ifRoom" />
     <item
             android:id="@+id/action_item1"
-            android:title="@string/item1"
+            android:title="Mail1"
             android:orderInCategory="1"
             app:showAsAction="never" />
     <item
             android:id="@+id/action_item2"
-            android:title="@string/item2"
+            android:title="Mail2"
             android:orderInCategory="2"
             app:showAsAction="never" />
 </menu>
