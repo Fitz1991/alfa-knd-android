@@ -1,6 +1,7 @@
 package ru.npc_ksb.alfaknd
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
                     transaction.replace(R.id.fragment_container, textFragment)
                     transaction.addToBackStack(null)
                     transaction.commit()
+                    //listView.setBackgroundColor(Color.TRANSPARENT)
                 }
                 1 -> {
                     val textFragment = BlankFragment1()

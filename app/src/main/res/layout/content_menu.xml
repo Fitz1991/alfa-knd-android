@@ -10,7 +10,8 @@
 			android:layout_height="match_parent"
 			android:background="@color/colorPrimaryDark"
 			android:divider="@null"
-			>
+			android:choiceMode="singleChoice"
+			android:listSelector="@android:color/holo_green_dark" >
 	</ListView>
 
 </LinearLayout>
