@@ -18,8 +18,6 @@ import ru.npc_ksb.alfaknd.fragments.MasterFragment
 import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener
 
 
-
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         //val navView: FragmentActivity = findViewById(R.id.content_menu)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setIcon(R.mipmap.ic_alfaknd)
 
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
