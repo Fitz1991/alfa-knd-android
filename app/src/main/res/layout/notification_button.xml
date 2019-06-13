@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:clickable="true">
+
+    <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/notification_button_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_notification"
+            android:layout_margin="0dp"
+            android:contentDescription="bell"/>
+
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/notification_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="17sp"
+            android:textSize="12sp"
+            android:textColor="#ffffffff"
+            android:gravity="center"
+            android:text="123"
+            android:layout_alignTop="@id/notification_button_icon"
+            android:layout_alignRight="@id/notification_button_icon"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="3dp"
+            android:paddingBottom="1dp"
+            android:paddingRight="4dp"
+            android:paddingLeft="4dp"
+            android:background="@drawable/rounded_square"/>
+</RelativeLayout>

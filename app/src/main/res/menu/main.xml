@@ -10,11 +10,16 @@
             android:orderInCategory="2"
             app:showAsAction="ifRoom" />
     <item
+            android:id="@+id/action_notification"
+            android:actionLayout="@layout/notification_button"
+            android:title="Уведомления"
+            android:icon="@drawable/ic_notification"
+            app:showAsAction="always"/>
+    <item
             android:id="@+id/action_mail"
             android:icon="@android:drawable/ic_dialog_email"
             android:title="Mail"
-            android:orderInCategory="1"
-            app:showAsAction="ifRoom" />
+            app:showAsAction="ifRoom"/>
     <item
             android:id="@+id/action_item1"
             android:title="Mail1"
