@@ -6,9 +6,9 @@
 		<item>Справочники</item>
 	</array>
 	<array name="menu_icons">
-		<item>@drawable/ic_action_name</item>
-		<item>@drawable/ic_menu_manage</item>
-		<item>@drawable/ic_menu_send</item>
-		<item>@drawable/ic_menu_camera</item>
+		<item>@drawable/ic_eye</item>
+		<item>@drawable/ic_exclamation</item>
+		<item>@drawable/ic_spy</item>
+		<item>@drawable/ic_books</item>
 	</array>
 </resources>
