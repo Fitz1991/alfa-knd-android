@@ -3,7 +3,6 @@ package ru.npc_ksb.alfaknd
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -11,14 +10,21 @@ import android.view.Menu
 import android.view.MenuItem
 import android.support.v4.widget.DrawerLayout
 import android.support.v4.widget.SlidingPaneLayout
-import android.util.Log
 import android.view.View
-import kotlinx.android.synthetic.main.content_main.*
-import ru.npc_ksb.alfaknd.fragments.MasterFragment
-import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import ru.npc_ksb.alfaknd.fragments.BlankFragment0
+import ru.npc_ksb.alfaknd.fragments.BlankFragment1
+import ru.npc_ksb.alfaknd.fragments.BlankFragment2
+import ru.npc_ksb.alfaknd.fragments.BlankFragment3
 
 
 class MainActivity : AppCompatActivity() {
+
+    var items: ArrayList<MenuActionItem>? = null
+    private lateinit var listView: ListView
+    private var adata = arrayOf("1", "2", "3","4")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,10 +50,58 @@ class MainActivity : AppCompatActivity() {
                 mSlidingLayout.openPane()
             }
         }
-    }
+        /* ------------------------------------------------------------------------------------------------------ */
 
+        val menuIcons = this.resources.obtainTypedArray(R.array.menu_icons)
+        val menuItems = this.resources.obtainTypedArray(R.array.menu_items)
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        listView = findViewById<View>(android.R.id.list) as ListView
+
+        val adapter = ArrayAdapter(
+            this@MainActivity,
+            android.R.layout.simple_list_item_1, adata
+            )
+
+        listView.adapter = adapter
+        listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            when (position) {
+                0 -> {
+                    val textFragment = BlankFragment0()
+                    val manager = supportFragmentManager
+                    val transaction = manager.beginTransaction()
+                    transaction.replace(R.id.fragment_container, textFragment)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                }
+                1 -> {
+                    val textFragment = BlankFragment1()
+                    val manager = supportFragmentManager
+                    val transaction = manager.beginTransaction()
+                    transaction.replace(R.id.fragment_container, textFragment)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                }
+                2 -> {
+                    val textFragment = BlankFragment2()
+                    val manager = supportFragmentManager
+                    val transaction = manager.beginTransaction()
+                    transaction.replace(R.id.fragment_container, textFragment)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                }
+                3 -> {
+                    val textFragment = BlankFragment3()
+                    val manager = supportFragmentManager
+                    val transaction = manager.beginTransaction()
+                    transaction.replace(R.id.fragment_container, textFragment)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                }
+            }
+            }
+        }
+
+        override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true

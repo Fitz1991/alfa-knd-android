@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.util.Log
 import android.view.MenuItem
+
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import kotlinx.android.synthetic.main.content_menu.*
 
 
 class MenuListAdapter(var resource: Int, var activity: Activity, items: Array<MenuActionItem>) :
@@ -38,6 +38,7 @@ class MenuListAdapter(var resource: Int, var activity: Activity, items: Array<Me
             if (position == item.ordinal) {
                 holder.menuItemImageView!!.setImageDrawable(menuIcons.getDrawable(item.ordinal))
                 holder.menuItemTextView!!.text =  menuItems.getString(item.ordinal)
+
                 break
             }
         }
