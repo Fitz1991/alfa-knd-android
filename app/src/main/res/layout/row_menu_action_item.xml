@@ -3,22 +3,27 @@
 			  android:orientation="horizontal"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
-			  android:padding="16dp"
+			  android:paddingLeft="16dp"
+			  android:paddingRight="16dp"
+			  android:paddingTop="12dp"
+			  android:paddingBottom="12dp"
 			  android:gravity="center_vertical"
 			  android:id="@+id/LinearLayout_menu">
 
 	<ImageView
 			android:id="@+id/menu_item_image_view"
-			android:layout_width="20dp"
-			android:layout_height="20dp"
-			android:layout_marginRight="10dp"
-			android:contentDescription="@android:string/ok" android:layout_marginLeft="10dp"/>
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:layout_marginLeft="5dp"
+			android:layout_marginRight="5dp"
+			android:contentDescription="@android:string/ok"/>
 
 	<TextView
 			android:id="@+id/menu_item_text_view"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="16sp"
-			android:textColor="@android:color/white" android:layout_marginStart="17dp"/>
+			android:textColor="@android:color/white"
+			android:layout_marginStart="17dp"/>
 
 </LinearLayout>
