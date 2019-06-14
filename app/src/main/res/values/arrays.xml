@@ -1,11 +1,11 @@
 <resources>
-	<array name="menu_items">
+	<array name="sidebar_items">
 		<item>Проверки текущего года</item>
 		<item>Рейды</item>
 		<item>Профилактические мероприятия</item>
 		<item>Справочники</item>
 	</array>
-	<array name="menu_icons">
+	<array name="sidebar_icons">
 		<item>@drawable/ic_eye</item>
 		<item>@drawable/ic_exclamation</item>
 		<item>@drawable/ic_spy</item>

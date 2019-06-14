@@ -11,6 +11,6 @@
 			android:background="@color/colorPrimaryDark"
 			android:divider="@null"
 			android:choiceMode="singleChoice"
-			android:listSelector="@drawable/my_list_selector" />
+			android:listSelector="@drawable/sidebar_selector" />
 
 </LinearLayout>

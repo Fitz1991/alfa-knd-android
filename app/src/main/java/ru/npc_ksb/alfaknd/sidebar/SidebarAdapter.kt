@@ -1,4 +1,4 @@
-package ru.npc_ksb.alfaknd.menu
+package ru.npc_ksb.alfaknd.sidebar
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,8 +9,8 @@ import android.widget.*
 import ru.npc_ksb.alfaknd.R
 
 
-class MenuAdapter(var resource: Int, var activity: Activity, var items: Array<MenuItems>) :
-    ArrayAdapter<MenuItems>(activity, resource, items) {
+class SidebarAdapter(var resource: Int, var activity: Activity, var items: Array<SidebarItems>) :
+    ArrayAdapter<SidebarItems>(activity, resource, items) {
 
     class MenuItemViewHolder {
         lateinit var menuItemImageView: ImageView
@@ -34,8 +34,8 @@ class MenuAdapter(var resource: Int, var activity: Activity, var items: Array<Me
 
         val holder = rowView.tag as MenuItemViewHolder
 
-        val menuIcons = activity.resources.obtainTypedArray(R.array.menu_icons)
-        val menuItems = activity.resources.obtainTypedArray(R.array.menu_items)
+        val menuIcons = activity.resources.obtainTypedArray(R.array.sidebar_icons)
+        val menuItems = activity.resources.obtainTypedArray(R.array.sidebar_items)
 
         for (item in items) {
             if (position == item.ordinal) {
