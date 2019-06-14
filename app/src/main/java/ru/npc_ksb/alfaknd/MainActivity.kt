@@ -12,10 +12,8 @@ import android.support.v4.widget.SlidingPaneLayout
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
-import ru.npc_ksb.alfaknd.fragments.BlankFragment0
-import ru.npc_ksb.alfaknd.fragments.BlankFragment1
-import ru.npc_ksb.alfaknd.fragments.BlankFragment2
-import ru.npc_ksb.alfaknd.fragments.BlankFragment3
+import ru.npc_ksb.alfaknd.fragments.*
+import ru.npc_ksb.alfaknd.sidebar.SidebarItems
 
 
 class MainActivity : AppCompatActivity() {
@@ -51,24 +49,28 @@ class MainActivity : AppCompatActivity() {
 
         val listView = findViewById<ListView>(android.R.id.list)
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            val transaction = supportFragmentManager.beginTransaction()
+            val tx = supportFragmentManager.beginTransaction()
             when (position) {
-                0 -> {
-                    transaction.replace(R.id.fragment_container, BlankFragment0())
+                SidebarItems.INSPECTIONS.ordinal -> {
+                    tx.replace(R.id.fragment_container, BlankFragment0())
                 }
-                1 -> {
-                    transaction.replace(R.id.fragment_container, BlankFragment1())
+                SidebarItems.RAIDS.ordinal -> {
+                    tx.replace(R.id.fragment_container, BlankFragment1())
                 }
-                2 -> {
-                    transaction.replace(R.id.fragment_container, BlankFragment2())
+                SidebarItems.PREVENTIONS.ordinal -> {
+                    tx.replace(R.id.fragment_container, BlankFragment2())
                 }
-                3 -> {
-                    transaction.replace(R.id.fragment_container, BlankFragment3())
+                SidebarItems.CATALOG.ordinal -> {
+                    tx.replace(R.id.fragment_container, BlankFragment3())
                 }
             }
-            transaction.addToBackStack(null)
-            transaction.commit()
+            tx.addToBackStack(null)
+            tx.commit()
         }
+        val tx = supportFragmentManager.beginTransaction()
+        tx.replace(R.id.fragment_container, DashboardFragment())
+        tx.addToBackStack(null)
+        tx.commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

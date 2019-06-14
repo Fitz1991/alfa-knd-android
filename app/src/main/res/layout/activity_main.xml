@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:fitsSystemWindows="true"
-	tools:context=".MainActivity"
-	>
+	tools:context=".MainActivity">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -34,19 +32,22 @@
 				android:id="@+id/sliding_pane_layout">
 
 				<fragment
-						android:name="ru.npc_ksb.alfaknd.sidebar.SidebarFragment"
-						android:layout_width="345dp"
-						android:layout_height="match_parent"
-						android:clickable="true"
-						android:focusable="true"
-						android:id="@+id/fragment_menu">
-				</fragment>
+					android:name="ru.npc_ksb.alfaknd.sidebar.SidebarFragment"
+					android:layout_width="345dp"
+					android:layout_height="match_parent"
+					android:clickable="true"
+					android:focusable="true"
+					android:id="@+id/fragment_sidebar"/>
 
-				<include layout="@layout/content_main"/>
+                <LinearLayout
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/sidebar_margin"
+                    android:background="@color/colorLinen"
+                    android:orientation="horizontal"/>
 
 			</android.support.v4.widget.SlidingPaneLayout>
-
 		</android.support.v4.widget.DrawerLayout>
 	</LinearLayout>
-
 </android.support.design.widget.CoordinatorLayout>
