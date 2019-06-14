@@ -3,7 +3,7 @@
     android:color="#80FFFFFF">
 
     <item>
-        <color android:color="#4C946A" />
+        <color android:color="#4D976A" />
     </item>
 
     <item android:id="@android:id/mask">
