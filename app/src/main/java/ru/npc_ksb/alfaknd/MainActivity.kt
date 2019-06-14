@@ -51,40 +51,24 @@ class MainActivity : AppCompatActivity() {
 
         val listView = findViewById<View>(android.R.id.list) as ListView
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            val manager = supportFragmentManager
+            val transaction = manager.beginTransaction()
             when (position) {
                 0 -> {
-                    val textFragment = BlankFragment0()
-                    val manager = supportFragmentManager
-                    val transaction = manager.beginTransaction()
-                    transaction.replace(R.id.fragment_container, textFragment)
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+                    transaction.replace(R.id.fragment_container, BlankFragment0())
                 }
                 1 -> {
-                    val textFragment = BlankFragment1()
-                    val manager = supportFragmentManager
-                    val transaction = manager.beginTransaction()
-                    transaction.replace(R.id.fragment_container, textFragment)
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+                    transaction.replace(R.id.fragment_container, BlankFragment1())
                 }
                 2 -> {
-                    val textFragment = BlankFragment2()
-                    val manager = supportFragmentManager
-                    val transaction = manager.beginTransaction()
-                    transaction.replace(R.id.fragment_container, textFragment)
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+                    transaction.replace(R.id.fragment_container, BlankFragment2())
                 }
                 3 -> {
-                    val textFragment = BlankFragment3()
-                    val manager = supportFragmentManager
-                    val transaction = manager.beginTransaction()
-                    transaction.replace(R.id.fragment_container, textFragment)
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+                    transaction.replace(R.id.fragment_container, BlankFragment3())
                 }
             }
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
     }
 
