@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ class BlankFragment0 : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Get the custom view for this fragment layout
-        val view = inflater!!.inflate(R.layout.fragment_blank0,container,false)
+        val view = inflater.inflate(R.layout.fragment_blank0,container,false)
 
         // Get the text view widget reference from custom layout
         val tv = view.findViewById<TextView>(R.id.text_view)

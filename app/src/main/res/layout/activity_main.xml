@@ -34,7 +34,7 @@
 				android:id="@+id/sliding_pane_layout">
 
 				<fragment
-						android:name="ru.npc_ksb.alfaknd.fragments.MasterFragment"
+						android:name="ru.npc_ksb.alfaknd.menu.MenuFragment"
 						android:layout_width="345dp"
 						android:layout_height="match_parent"
 						android:clickable="true"

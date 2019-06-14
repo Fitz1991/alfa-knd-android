@@ -1,22 +1,20 @@
-package ru.npc_ksb.alfaknd
+package ru.npc_ksb.alfaknd.menu
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.util.Log
-import android.view.MenuItem
 
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import kotlinx.android.synthetic.main.content_menu.*
+import ru.npc_ksb.alfaknd.R
 
 
-class MenuListAdapter(var resource: Int, var activity: Activity, items: Array<MenuActionItem>) :
-    ArrayAdapter<MenuActionItem>(activity, resource, items) {
+class MenuAdapter(var resource: Int, var activity: Activity, var items: Array<MenuItems>) :
+    ArrayAdapter<MenuItems>(activity, resource, items) {
 
-    private class MenuItemViewHolder {
-        var menuItemImageView: ImageView? = null
-        var menuItemTextView: TextView? = null
+    class MenuItemViewHolder {
+        lateinit var menuItemImageView: ImageView
+        lateinit var menuItemTextView: TextView
     }
 
     @SuppressLint("Recycle")
@@ -39,10 +37,10 @@ class MenuListAdapter(var resource: Int, var activity: Activity, items: Array<Me
         val menuIcons = activity.resources.obtainTypedArray(R.array.menu_icons)
         val menuItems = activity.resources.obtainTypedArray(R.array.menu_items)
 
-        for (item in MenuActionItem.values()) {
+        for (item in items) {
             if (position == item.ordinal) {
-                holder.menuItemImageView!!.setImageDrawable(menuIcons.getDrawable(item.ordinal))
-                holder.menuItemTextView!!.text =  menuItems.getString(item.ordinal)
+                holder.menuItemImageView.setImageDrawable(menuIcons.getDrawable(item.ordinal))
+                holder.menuItemTextView.text =  menuItems.getString(item.ordinal)
                 break
             }
         }

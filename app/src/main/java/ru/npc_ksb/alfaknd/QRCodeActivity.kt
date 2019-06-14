@@ -17,7 +17,6 @@ import java.io.IOException
 import okhttp3.RequestBody
 
 
-
 class QRCodeActivity : AppCompatActivity(), ResultHandler {
     companion object {
         private var REQUEST_CAMERA_CODE : Int = 1
@@ -30,7 +29,9 @@ class QRCodeActivity : AppCompatActivity(), ResultHandler {
     }
 
     fun requestPermissions() {
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA_CODE)
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),
+            REQUEST_CAMERA_CODE
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +89,10 @@ class QRCodeActivity : AppCompatActivity(), ResultHandler {
         val JSON = MediaType.parse("application/json; charset=utf-8")
         val body = RequestBody.create(JSON, """{ "token": "${result.text}" }""")
         val request = Request.Builder().url("http://192.168.43.39:3000/api/account/device-login/")
-            .addHeader(Application.csfrTokenHeaderName, Application.csrfTokenHeader)
+            .addHeader(
+                Application.csfrTokenHeaderName,
+                Application.csrfTokenHeader
+            )
             .post(body)
             .build()
 

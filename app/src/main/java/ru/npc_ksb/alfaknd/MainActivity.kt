@@ -49,10 +49,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val listView = findViewById<View>(android.R.id.list) as ListView
+        val listView = findViewById<ListView>(android.R.id.list)
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            val manager = supportFragmentManager
-            val transaction = manager.beginTransaction()
+            val transaction = supportFragmentManager.beginTransaction()
             when (position) {
                 0 -> {
                     transaction.replace(R.id.fragment_container, BlankFragment0())
