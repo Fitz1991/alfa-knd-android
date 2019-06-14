@@ -14,6 +14,11 @@ import kotlinx.android.synthetic.main.content_menu.*
 class MenuListAdapter(var resource: Int, var activity: Activity, items: Array<MenuActionItem>) :
     ArrayAdapter<MenuActionItem>(activity, resource, items) {
 
+    private class MenuItemViewHolder {
+        var menuItemImageView: ImageView? = null
+        var menuItemTextView: TextView? = null
+    }
+
     @SuppressLint("Recycle")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var rowView = convertView
@@ -38,16 +43,10 @@ class MenuListAdapter(var resource: Int, var activity: Activity, items: Array<Me
             if (position == item.ordinal) {
                 holder.menuItemImageView!!.setImageDrawable(menuIcons.getDrawable(item.ordinal))
                 holder.menuItemTextView!!.text =  menuItems.getString(item.ordinal)
-
                 break
             }
         }
 
         return rowView
-    }
-
-    private class MenuItemViewHolder {
-        var menuItemImageView: ImageView? = null
-        var menuItemTextView: TextView? = null
     }
 }
