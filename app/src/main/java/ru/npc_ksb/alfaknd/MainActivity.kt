@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import ru.npc_ksb.alfaknd.fragments.*
+import ru.npc_ksb.alfaknd.sidebar.SidebarAdapter
 import ru.npc_ksb.alfaknd.sidebar.SidebarItems
 
 
@@ -23,10 +24,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val mSlidingLayout: SlidingPaneLayout = findViewById(R.id.sliding_pane_layout)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val mSlidingLayout = findViewById<SlidingPaneLayout>(R.id.sliding_pane_layout)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar.setLogo(R.mipmap.ic_alfaknd)
         setSupportActionBar(toolbar)
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
@@ -34,8 +37,6 @@ class MainActivity : AppCompatActivity() {
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         )
-
-        supportActionBar!!.setIcon(R.mipmap.ic_alfaknd)
 
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -64,6 +65,11 @@ class MainActivity : AppCompatActivity() {
                     changeFragment(BlankFragment3())
                 }
             }
+        }
+
+        toolbar.setOnClickListener {
+            changeFragment(DashboardFragment())
+            listView.adapter = SidebarAdapter(R.layout.sidebar_item, this, SidebarItems.values())
         }
         changeFragment(DashboardFragment())
     }
