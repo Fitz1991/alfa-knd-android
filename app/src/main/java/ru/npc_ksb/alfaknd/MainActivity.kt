@@ -1,5 +1,6 @@
 package ru.npc_ksb.alfaknd
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,21 +11,26 @@ import android.view.Menu
 import android.view.MenuItem
 import android.support.v4.widget.DrawerLayout
 import android.support.v4.widget.SlidingPaneLayout
+import android.text.Layout
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
+import android.widget.LinearLayout
 import android.widget.ListView
+import kotlinx.android.synthetic.main.activity_main.*
 import ru.npc_ksb.alfaknd.fragments.*
 import ru.npc_ksb.alfaknd.sidebar.SidebarAdapter
 import ru.npc_ksb.alfaknd.sidebar.SidebarItems
 
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val mSlidingLayout = findViewById<SlidingPaneLayout>(R.id.sliding_pane_layout)
+        val sidebar = findViewById<SlidingPaneLayout>(R.id.sidebar_layout)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.setLogo(R.mipmap.ic_alfaknd)
         setSupportActionBar(toolbar)
@@ -42,10 +48,10 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         toolbar.setNavigationOnClickListener {
-            if (mSlidingLayout.isOpen) {
-                mSlidingLayout.closePane()
+            if (sidebar.isOpen) {
+                sidebar.closePane()
             } else {
-                mSlidingLayout.openPane()
+                sidebar.openPane()
             }
         }
 
@@ -70,8 +76,19 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnClickListener {
             changeFragment(DashboardFragment())
             listView.adapter = SidebarAdapter(R.layout.sidebar_item, this, SidebarItems.values())
+            if (sidebar.isOpen) {
+                sidebar.closePane()
+            }
         }
         changeFragment(DashboardFragment())
+
+        val fc = findViewById<LinearLayout>(R.id.fragment_container)
+        fc.setOnTouchListener { _: View, _: MotionEvent ->
+            if (sidebar.isOpen) {
+                sidebar.closePane()
+            }
+            true
+        }
     }
 
     fun changeFragment(f: Fragment) {
