@@ -74,20 +74,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         toolbar.setOnClickListener {
-            changeFragment(DashboardFragment())
             listView.adapter = SidebarAdapter(R.layout.sidebar_item, this, SidebarItems.values())
-            if (sidebar.isOpen) {
-                sidebar.closePane()
-            }
+            changeFragment(DashboardFragment())
         }
         changeFragment(DashboardFragment())
 
         val fc = findViewById<LinearLayout>(R.id.fragment_container)
-        fc.setOnTouchListener { _: View, _: MotionEvent ->
+        fc.setOnClickListener {
             if (sidebar.isOpen) {
                 sidebar.closePane()
             }
-            true
         }
     }
 
@@ -96,6 +92,10 @@ class MainActivity : AppCompatActivity() {
         tx.replace(R.id.fragment_container, f)
         tx.addToBackStack(null)
         tx.commit()
+        val sidebar = findViewById<SlidingPaneLayout>(R.id.sidebar_layout)
+        if (sidebar.isOpen) {
+            sidebar.closePane()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
