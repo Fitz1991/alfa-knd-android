@@ -111,7 +111,6 @@ class MainActivity : AppCompatActivity() {
         } else super.onOptionsItemSelected(item)
     }
 
-    @Suppress("never_used")
     fun onQRCodeClick(v: View) {
         val intent = Intent(this, QRCodeActivity::class.java)
         startActivity(intent)
