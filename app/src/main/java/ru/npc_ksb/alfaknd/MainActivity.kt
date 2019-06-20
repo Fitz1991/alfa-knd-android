@@ -107,9 +107,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Log.d("qwerty", item.toString())
         val id = item.itemId
-        return if (id == R.id.action_settings) {
-            true
-        } else super.onOptionsItemSelected(item)
+        //return if (id == R.id.action_settings) {
+        return super.onOptionsItemSelected(item)
     }
 
     fun onQRCodeClick(v: View) {
