@@ -21,6 +21,7 @@
 			android:layout_height="wrap_content"
 			tools:layout_editor_absoluteY="451dp"
 			tools:layout_editor_absoluteX="144dp"
+			android:onClick="onTestClick"
 			android:id="@+id/button2"
 			android:layout_y="38dp"
 			android:layout_x="31dp"/>

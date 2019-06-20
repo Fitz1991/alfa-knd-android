@@ -19,6 +19,7 @@ class Test {
 
         fun getNames() {
             val db = DB.Read()
+            
             val cursor = db.rawQuery("SELECT $COLUMN_ID, $COLUMN_NAME FROM $TABLE", null)
             cursor!!.moveToFirst()
             while (cursor.moveToNext()) {

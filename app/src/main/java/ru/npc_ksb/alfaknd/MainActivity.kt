@@ -1,6 +1,7 @@
 package ru.npc_ksb.alfaknd
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -114,5 +115,8 @@ class MainActivity : AppCompatActivity() {
     fun onQRCodeClick(v: View) {
         val intent = Intent(this, QRCodeActivity::class.java)
         startActivity(intent)
+    }
+    fun onTestClick(v: View) {
+        ProgressDialog.show(this, "Loading", "Wait while loading...")
     }
 }

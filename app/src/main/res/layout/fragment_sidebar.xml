@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <ListView
@@ -10,6 +10,8 @@
             android:background="@color/colorPrimaryDark"
             android:divider="@null"
             android:choiceMode="singleChoice"
-            android:listSelector="@drawable/sidebar_selector"/>
+            android:listSelector="@drawable/sidebar_selector">
+    </ListView>
+
 
 </LinearLayout>
