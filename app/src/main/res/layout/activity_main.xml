@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -13,7 +13,7 @@
 		android:orientation="vertical"
 		android:id="@+id/linearLayout">
 
-		<android.support.v7.widget.Toolbar
+		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -21,12 +21,12 @@
 			android:background="@color/colorPrimaryDark"
 			theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
 
-		<android.support.v4.widget.DrawerLayout
+		<androidx.drawerlayout.widget.DrawerLayout
 			android:id="@+id/drawer_layout"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
-			<android.support.v4.widget.SlidingPaneLayout
+			<androidx.slidingpanelayout.widget.SlidingPaneLayout
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:id="@+id/sidebar_layout">
@@ -47,7 +47,7 @@
                     android:background="@color/colorLinen"
                     android:orientation="horizontal"/>
 
-			</android.support.v4.widget.SlidingPaneLayout>
-		</android.support.v4.widget.DrawerLayout>
+			</androidx.slidingpanelayout.widget.SlidingPaneLayout>
+		</androidx.drawerlayout.widget.DrawerLayout>
 	</LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

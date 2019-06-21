@@ -13,6 +13,7 @@ class Session {
     }
 
     companion object {
+        // const val serverAddress = "http://192.168.43.39:3000"
         const val serverAddress = "http://192.168.43.39:3000"
         const val csfrTokenHeaderName = "_csrftoken"
         const val sessionIdCookieName = "_sessionid"
@@ -54,7 +55,7 @@ class Session {
 
             val client = OkHttpClient()
 
-            val request = Request.Builder().url("http://192.168.43.39:3000/api/account/login-check/")
+            val request = Request.Builder().url("$serverAddress/api/account/login-check/")
                 .addHeader("Cookie", "$sessionIdCookieName=$sessionIdCookie; USER_AUTHORITY_ID=1")
                 .get()
                 .build()
