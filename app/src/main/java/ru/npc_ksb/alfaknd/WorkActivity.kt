@@ -22,12 +22,7 @@ import ru.npc_ksb.alfaknd.sidebar.SidebarAdapter
 import ru.npc_ksb.alfaknd.sidebar.SidebarItems
 
 
-class MainActivity : AppCompatActivity() {
-    companion object {
-        var session = Session()
-    }
-
-
+class WorkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

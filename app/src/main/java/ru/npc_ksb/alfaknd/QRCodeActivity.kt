@@ -89,10 +89,10 @@ class QRCodeActivity : AppCompatActivity(), ResultHandler {
         val JSON = MediaType.parse("application/json; charset=utf-8")
         val body = RequestBody.create(JSON, """{ "token": "${result.text}" }""")
         val request = Request.Builder().url("http://192.168.43.39:3000/api/account/device-login/")
-            .addHeader(
-                Session.csfrTokenHeaderName,
-                Session.csrfTokenHeader
-            )
+            /*.addHeader(
+                Session.csrfHeader,
+                Session.csrfToken
+            )*/
             .post(body)
             .build()
 
@@ -107,12 +107,12 @@ class QRCodeActivity : AppCompatActivity(), ResultHandler {
             @Throws(IOException::class)
             override fun onResponse(call : Call, response : Response) {
                 val cookies = response.headers().values("set-cookie")
-                val pattern = "${Session.sessionIdCookieName}=([^;]+)".toRegex()
+                val pattern = "${Session.sessionIDHeader}=([^;]+)".toRegex()
                 cookies.forEach { cookie ->
                     val found = pattern.find(cookie)
                     if (found != null) {
-                        Session.sessionIdCookie = found.groups[1]!!.value
-                        Log.d("qwerty", "session: ${Session.sessionIdCookie}")
+                        /*Session.sessionID = found.groups[1]!!.value
+                        Log.d("qwerty", "session: ${Session.sessionID}")*/
                     }
                 }
 
