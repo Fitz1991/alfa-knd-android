@@ -5,30 +5,14 @@
       tools:contex=".MainActivity">
 
     <item
-            android:id="@+id/action_settings"
-            android:icon="@android:drawable/ic_menu_manage"
-            android:title="@string/action_settings"
-            android:orderInCategory="2"
-            app:showAsAction="ifRoom"/>
+            android:id="@+id/action_mail"
+            android:icon="@android:drawable/ic_menu_rotate"
+            android:title="@string/menu_sync"
+            app:showAsAction="always"/>
     <item
             android:id="@+id/action_notification"
             android:actionLayout="@layout/menu_notification_button"
-            android:title="Уведомления"
+            android:title="@string/menu_notifications"
             android:icon="@drawable/ic_notification"
-            app:showAsAction="always"/>
-    <item
-            android:id="@+id/action_mail"
-            android:icon="@android:drawable/ic_dialog_email"
-            android:title="Mail"
             app:showAsAction="ifRoom"/>
-    <item
-            android:id="@+id/action_item1"
-            android:title="Mail1"
-            android:orderInCategory="1"
-            app:showAsAction="never"/>
-    <item
-            android:id="@+id/action_item2"
-            android:title="Mail2"
-            android:orderInCategory="2"
-            app:showAsAction="never"/>
 </menu>
