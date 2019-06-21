@@ -18,7 +18,7 @@ class InspectionsF : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         // Get the custom view for this fragment layout
-        val view = inflater.inflate(R.layout.f_v_inspections,container,false)
+        val view = inflater.inflate(R.layout.f_inspections,container,false)
 
 
         // Return the fragment view/layout

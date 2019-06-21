@@ -19,7 +19,7 @@ class PreventionsF : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Get the custom view for this fragment layout
-        val view = inflater!!.inflate(R.layout.f_v_preventions,container,false)
+        val view = inflater!!.inflate(R.layout.f_preventions,container,false)
 
         // Get the text view widget reference from custom layout
         val tv = view.findViewById<TextView>(R.id.text_view)

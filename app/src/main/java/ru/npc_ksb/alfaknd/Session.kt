@@ -1,5 +1,7 @@
 package ru.npc_ksb.alfaknd
 
+import android.app.Activity
+import android.app.Application
 import android.util.Log
 import okhttp3.*
 import java.io.IOException
@@ -7,35 +9,35 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class Session {
-    interface OnAuthChangeListener {
-        fun onAuthChange(logged: Boolean)
-    }
-
     companion object {
         private const val TAG = "Session"
 
-        const val serverAddress = "http://192.168.43.39:3000"
+        const val serverAddress = "http://192.168.43.112:3000"
         const val csrfHeader = "_csrftoken"
         const val sessionIDHeader = "_sessionid"
 
-        private var changeListeners = ArrayList<OnAuthChangeListener>()
+        private var changeListeners = ArrayList<(logged: Boolean) -> Unit>()
         private var csrfToken = ""
         private var sessionID = ""
+
+        var activity: Activity? = null
 
         private var started = false
 
 
-        fun setOnOnAuthChangeListener(listener: OnAuthChangeListener) {
+        fun addAuthChangeListener(listener: (logged: Boolean) -> Unit) {
             changeListeners.add(listener)
         }
 
-        fun remOnOnAuthChangeListener(listener: OnAuthChangeListener) {
+        fun remAuthChangeListener(listener: (logged: Boolean) -> Unit) {
             changeListeners.remove(listener)
         }
 
         private fun onAuthChange(logged: Boolean) {
-            changeListeners.forEach { listener ->
-                listener.onAuthChange(logged)
+            activity!!.runOnUiThread {
+                for (listener in changeListeners) {
+                    listener(logged)
+                }
             }
         }
 
@@ -88,6 +90,7 @@ class Session {
 
         fun authLogout() {
             sessionID = ""
+            csrfToken = ""
             onAuthChange(false)
         }
 
@@ -117,6 +120,7 @@ class Session {
                         if (found != null) {
                             sessionID = found.groups[1]!!.value
                             callback(true)
+                            onAuthChange(true)
                             return
                         }
                     }
