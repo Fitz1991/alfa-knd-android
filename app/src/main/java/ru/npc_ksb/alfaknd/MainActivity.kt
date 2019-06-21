@@ -17,6 +17,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.ProgressBar
 import ru.npc_ksb.alfaknd.views.*
 import ru.npc_ksb.alfaknd.sidebar.SidebarAdapter
 import ru.npc_ksb.alfaknd.sidebar.SidebarItems
@@ -24,12 +25,21 @@ import ru.npc_ksb.alfaknd.sidebar.SidebarItems
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        var session = Session()
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        Session.start()
+
+        val progress = this.findViewById<ProgressBar>(R.id.progressBar)
+        progress.visibility = View.VISIBLE
+    }
+
+    fun onScanCodeClick(v: View) {
+        val intent = Intent(this, QRCodeActivity::class.java)
+        startActivity(intent)
     }
 }

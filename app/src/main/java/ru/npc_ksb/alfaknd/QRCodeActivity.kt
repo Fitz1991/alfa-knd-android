@@ -7,29 +7,26 @@ import android.content.pm.PackageManager
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.google.zxing.Result
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import me.dm7.barcodescanner.zxing.ZXingScannerView.ResultHandler
-import okhttp3.*
-import java.io.IOException
-import okhttp3.RequestBody
 
 
 class QRCodeActivity : AppCompatActivity(), ResultHandler {
     companion object {
-        private var REQUEST_CAMERA_CODE : Int = 1
+        private val REQUEST_CAMERA_CODE: Int = 1
     }
 
     private var scannerView: ZXingScannerView? = null
 
-    fun checkPermissions() : Boolean {
+    fun checkPermissions(): Boolean {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
     }
 
     fun requestPermissions() {
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),
+        ActivityCompat.requestPermissions(
+            this, arrayOf(Manifest.permission.CAMERA),
             REQUEST_CAMERA_CODE
         )
     }
@@ -82,42 +79,12 @@ class QRCodeActivity : AppCompatActivity(), ResultHandler {
     }
 
     override fun handleResult(result: Result) {
-        val activity = this
-
-        val client = OkHttpClient()
-
-        val JSON = MediaType.parse("application/json; charset=utf-8")
-        val body = RequestBody.create(JSON, """{ "token": "${result.text}" }""")
-        val request = Request.Builder().url("http://192.168.43.39:3000/api/account/device-login/")
-            /*.addHeader(
-                Session.csrfHeader,
-                Session.csrfToken
-            )*/
-            .post(body)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call : Call, e : IOException) {
-                Log.d("qwerty", e.message)
-                call.cancel()
-
-                activity.scannerView?.resumeCameraPreview(activity)
+        Session.authWithCode(result.text) { success ->
+            if (success) {
+                finish()
+            } else {
+                scannerView?.resumeCameraPreview(this)
             }
-
-            @Throws(IOException::class)
-            override fun onResponse(call : Call, response : Response) {
-                val cookies = response.headers().values("set-cookie")
-                val pattern = "${Session.sessionIDHeader}=([^;]+)".toRegex()
-                cookies.forEach { cookie ->
-                    val found = pattern.find(cookie)
-                    if (found != null) {
-                        /*Session.sessionID = found.groups[1]!!.value
-                        Log.d("qwerty", "session: ${Session.sessionID}")*/
-                    }
-                }
-
-                activity.finish()
-            }
-        })
+        }
     }
 }
