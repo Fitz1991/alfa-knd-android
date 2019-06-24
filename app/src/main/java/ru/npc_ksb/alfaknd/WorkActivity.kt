@@ -1,12 +1,12 @@
 package ru.npc_ksb.alfaknd
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.support.v4.widget.DrawerLayout
-import android.support.v4.widget.SlidingPaneLayout
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView

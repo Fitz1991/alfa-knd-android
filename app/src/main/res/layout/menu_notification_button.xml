@@ -7,14 +7,14 @@
                 android:clickable="true"
                 android:focusable="true">
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/notification_button_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_notification"
             android:layout_margin="0dp"/>
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/notification_button_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
