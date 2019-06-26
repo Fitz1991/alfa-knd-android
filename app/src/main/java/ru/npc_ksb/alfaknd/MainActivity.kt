@@ -12,14 +12,11 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
-import android.text.Layout
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.ListView
-import kotlinx.android.synthetic.main.activity_main.*
 import ru.npc_ksb.alfaknd.fragments.*
 import ru.npc_ksb.alfaknd.sidebar.SidebarAdapter
 import ru.npc_ksb.alfaknd.sidebar.SidebarItems
@@ -30,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val sidebar = findViewById<SlidingPaneLayout>(R.id.sidebar_layout)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.setLogo(R.mipmap.ic_alfaknd)
