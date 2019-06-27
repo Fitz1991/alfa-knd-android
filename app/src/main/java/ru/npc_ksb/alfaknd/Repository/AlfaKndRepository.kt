@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.Single
 import ru.npc_ksb.alfaknd.models.Datum
 import ru.npc_ksb.alfaknd.models.DatumDao
@@ -19,17 +20,17 @@ class AlfaKndRepository(private val datumDao: DatumDao) {
     }
 
     @WorkerThread
-    suspend fun insert(datum: Datum) {
-        datumDao.insert(datum)
+    fun insert(datum: Datum) : Single<Int> {
+        return datumDao.insert(datum)
     }
 
     @WorkerThread
-    suspend fun update(datum: Datum) {
-        datumDao.update(datum)
+    fun update(datum: Datum) : Single<Int> {
+        return datumDao.update(datum)
     }
 
     @WorkerThread
-    suspend fun delete(datum: Datum) {
+    fun delete(datum: Datum) {
         datumDao.delete(datum)
     }
 }

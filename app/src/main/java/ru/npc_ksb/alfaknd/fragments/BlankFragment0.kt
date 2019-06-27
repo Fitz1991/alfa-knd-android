@@ -96,14 +96,24 @@ class BlankFragment0 : Fragment() {
                     }
                     //если не идентичны, то обновляем
                     else{
-                        alfaKndViewModel.update(newData)
-                        alfaKndViewModel.repository.getById(newData.pk!!)
+                        alfaKndViewModel.repository.update(newData)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(object:DisposableSingleObserver<Datum>() {
-                                override fun onSuccess(updatedData:Datum) {
-                                    Log.d(TAG, "Новые данные объекта с pk ${updatedData.pk}: ${jsonParser!!.convertToJson(updatedData)}")
+                            .subscribe(object:DisposableSingleObserver<Int>() {
+                                override fun onSuccess(pk:Int) {
+                                    alfaKndViewModel.repository.getById(newData.pk!!)
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(object:DisposableSingleObserver<Datum>() {
+                                            override fun onSuccess(updatedData:Datum) {
+                                                Log.d(TAG, "Состояние строки с pk ${data.pk} до: ${jsonParser!!.convertToJson(data)}")
+                                                Log.d(TAG, "Состояние строки с pk ${updatedData.pk} после: ${jsonParser!!.convertToJson(updatedData)}")
 
+                                            }
+                                            override fun onError(e:Throwable) {
+
+                                            }
+                                        })
                                 }
                                 override fun onError(e:Throwable) {
 
@@ -128,6 +138,7 @@ class BlankFragment0 : Fragment() {
                 }
             })
     }
+
 
 
     override fun onDestroy() {
