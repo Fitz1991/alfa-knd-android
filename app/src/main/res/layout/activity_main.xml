@@ -8,14 +8,15 @@
 	tools:context=".MainActivity">
 
 	<ProgressBar
-			style="?android:attr/progressBarStyle"
-			android:layout_width="117dp"
-			android:layout_height="128dp"
-			android:id="@+id/progressBar" android:layout_alignParentStart="true" android:layout_marginStart="27dp"
-			android:layout_alignParentEnd="true" android:layout_marginEnd="1058dp" android:layout_marginTop="70dp"
-			android:layout_alignParentTop="true" android:layout_alignParentBottom="true"
-			android:layout_marginBottom="570dp" android:visibility="visible" android:layout_y="63dp"
-			android:layout_x="56dp"/>
+			android:id="@+id/progressBar"
+			style="?android:attr/progressBarStyleLarge"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:indeterminate="true"
+			android:layout_gravity="center"
+			android:visibility="visible"
+			android:layout_y="0dp"
+			android:layout_x="0dp"/>
 	<TextView
 			android:text="Вы не авторизированы! Пожалуйста, привяжите устройство в личном кабинете"
 			android:layout_width="441dp"

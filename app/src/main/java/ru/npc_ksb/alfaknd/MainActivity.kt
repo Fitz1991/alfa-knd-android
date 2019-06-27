@@ -22,12 +22,9 @@ class MainActivity : AppCompatActivity() {
         Session.addAuthChangeListener {logged ->
             if (logged) {
                 progress.visibility = View.GONE
-                Log.d("mainma", "success")
                 runOnUiThread {
-                    Log.d("mainma", "success run")
                     val intent = Intent(this, WorkActivity::class.java)
                     startActivity(intent)
-                    Log.d("mainma", "success start")
                 }
             } else {
                 progress.visibility = View.VISIBLE
