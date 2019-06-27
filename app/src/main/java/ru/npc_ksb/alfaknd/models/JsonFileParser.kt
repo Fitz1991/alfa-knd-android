@@ -53,4 +53,8 @@ class JsonFileParser {
             Log.d(TAG, ex.message)
         }
     }
+
+    fun convertToJson(datum:Datum) : String{
+        return gson.toJson(datum)
+    }
 }

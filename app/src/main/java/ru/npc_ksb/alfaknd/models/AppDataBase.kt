@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(Datum::class), version = 1)
+@Database(entities = arrayOf(Datum::class), version = 2)
 public abstract class AppDatabase : RoomDatabase() {
 
     abstract fun datumDao(): DatumDao

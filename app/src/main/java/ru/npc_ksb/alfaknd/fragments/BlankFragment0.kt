@@ -22,6 +22,9 @@ import androidx.lifecycle.ViewModelProviders
 import ru.npc_ksb.alfaknd.models.AppDatabase
 import androidx.room.Room
 import com.google.gson.JsonParser
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 
 import ru.npc_ksb.alfaknd.Application
 import ru.npc_ksb.alfaknd.models.AlfaKndViewModel
@@ -56,34 +59,76 @@ class BlankFragment0 : Fragment() {
         alfaKndViewModel = ViewModelProviders.of(this).get(AlfaKndViewModel::class.java)
 
 
-        //подписываемся на изменение данных в БД
+        //Выводим все данные из таблицы datum
         alfaKndViewModel.allDatum.observe(this, Observer { datas ->
             // Обновляем данные при изменении БД
             datas?.let {
-                for (word in datas)
-                    Log.d(TAG, "Произошли изменения")
+                for (datum in datas)
+                    Log.d(TAG, "Все данные из таблицы datum : ${jsonParser!!.convertToJson(datum)}")
             }
         })
-
-
 
         jsonParser = JsonFileParser()
+        //парсим все данные из Json файла
         val dataPars: Data = jsonParser!!.getObjectFromJSONFile(context, "response.json")
+
+        //парсим новые данные, которые хотим вставить в БД
         val newData : Datum = jsonParser!!.getObjectDatumFromJSONFile(context, "new_data.json")
 
-
-        alfaKndViewModel.repository.getById(newData.pk!!).observe(this, Observer { data ->
-            // Обновляем данные при изменении БД
-            data?.let {
-                data.compare(newData)
-            }
-        })
-
-
-//        for (data in dataPars.data!!.iterator()) {
-//            alfaKndViewModel.insert(data)
-//        }
+        //вставляем в БД
+        insertNewData(newData)
     }
+
+    fun insertNewData(newData: Datum) {
+        //проверяем есть ли уже данные в БД с newData.pk
+        val dataOld = alfaKndViewModel.repository.getById(newData.pk!!)
+        dataOld
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object:DisposableSingleObserver<Datum>() {
+                override fun onSuccess(employee:Datum) {
+                    val data = employee
+
+                    val isEquals = data.compare(newData)
+                    //если данные идентичны
+                    if (isEquals == 0) {
+                        Log.d(TAG, "Обновлять нечего")
+                    }
+                    //если не идентичны, то обновляем
+                    else{
+                        alfaKndViewModel.update(newData)
+                        alfaKndViewModel.repository.getById(newData.pk!!)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(object:DisposableSingleObserver<Datum>() {
+                                override fun onSuccess(updatedData:Datum) {
+                                    Log.d(TAG, "Новые данные объекта с pk ${updatedData.pk}: ${jsonParser!!.convertToJson(updatedData)}")
+
+                                }
+                                override fun onError(e:Throwable) {
+
+                                }
+                            })
+                    }
+                }
+                override fun onError(e:Throwable) {
+                    alfaKndViewModel.insert(newData)
+                    Log.d(TAG, "Данных с pk ${newData.pk} не существует записываем в БД..")
+                    alfaKndViewModel.repository.getById(newData.pk!!)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(object:DisposableSingleObserver<Datum>() {
+                            override fun onSuccess(addedData:Datum) {
+                                Log.d(TAG, "Новые данные объекта с pk ${addedData.pk}: ${jsonParser!!.convertToJson(addedData)}")
+                            }
+                            override fun onError(e:Throwable) {
+
+                            }
+                        })
+                }
+            })
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

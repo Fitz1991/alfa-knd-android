@@ -2,6 +2,8 @@ package ru.npc_ksb.alfaknd.models
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import io.reactivex.Flowable
+import io.reactivex.Single
 
 @Dao
 interface DatumDao {
@@ -10,7 +12,7 @@ interface DatumDao {
     fun getAll():LiveData<List<Datum>>
 
     @Query("SELECT * FROM datum WHERE pk = :id")
-    fun getById(id: Long):LiveData<Datum>
+    fun getById(id: Long): Single<Datum>
 
     @Insert
     fun insert(employee:Datum)

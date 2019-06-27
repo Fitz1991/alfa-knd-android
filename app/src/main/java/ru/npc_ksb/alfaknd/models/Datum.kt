@@ -10,8 +10,6 @@ import com.google.gson.annotations.SerializedName
 @Entity
 class Datum{
     @PrimaryKey
-    var id : Long?=null
-
     @SerializedName("pk")
     @Expose
     var pk: Long? = null
@@ -37,10 +35,17 @@ class Datum{
     @Expose
     var changeNumber: Int? = null
 
-    fun compare(newDatum: Datum?) {
-//        val javers  = JaversBuilder.javers().build()
-//        val diff : Diff  = javers!!.compare(this, newDatum)
-//        val valChange : ValueChange = diff.getChangesByType(ValueChange::class.java).get(0)
-        Log.d("myLog", "asdas")
+    fun compare(newDatum: Datum?) : Int {
+        val comparator = compareBy(
+            Datum::pk,
+            Datum::str,
+            Datum::inn,
+            Datum::address,
+            Datum::ogrn,
+            Datum::subjectType,
+            Datum::name,
+            Datum::changeNumber)
+
+        return comparator.compare(this, newDatum)
     }
 }

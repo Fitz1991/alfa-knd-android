@@ -16,6 +16,7 @@ class AlfaKndViewModel(application: Application) : AndroidViewModel(application)
 
     init {
         //создаем БД
+        //datumDao()-поянмяет с какой таблицей работаеем
         val alfaKndDao = AppDatabase.getDatabase(application, viewModelScope).datumDao()
 
         repository = AlfaKndRepository(alfaKndDao)
@@ -24,5 +25,9 @@ class AlfaKndViewModel(application: Application) : AndroidViewModel(application)
 
     fun insert(datum: Datum) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(datum)
+    }
+
+    fun update(datum: Datum) = viewModelScope.launch(Dispatchers.IO) {
+        repository.update(datum)
     }
 }
