@@ -1,4 +1,4 @@
-package ru.npc_ksb.alfaknd.fragments
+package ru.npc_ksb.alfaknd.views
 
 import android.content.Context
 import android.graphics.Color
@@ -31,7 +31,7 @@ import ru.npc_ksb.alfaknd.models.AlfaKndViewModel
 import ru.npc_ksb.alfaknd.models.Datum
 
 
-class BlankFragment0 : Fragment() {
+class InspectionsF : Fragment() {
     val TAG : String = "myLog"
     var jsonParser : JsonFileParser? = null
     private lateinit var alfaKndViewModel: AlfaKndViewModel
@@ -46,7 +46,7 @@ class BlankFragment0 : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Get the custom view for this fragment layout
-        val view = inflater.inflate(R.layout.fragment_blank0,container,false)
+        val view = inflater.inflate(R.layout.f_inspections,container,false)
         return view
     }
 

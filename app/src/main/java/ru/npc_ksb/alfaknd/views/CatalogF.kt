@@ -1,8 +1,7 @@
-package ru.npc_ksb.alfaknd.fragments
+package ru.npc_ksb.alfaknd.views
 
 import android.content.Context
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,14 +12,15 @@ import android.widget.Toast
 
 import ru.npc_ksb.alfaknd.R
 
-class BlankFragment2 : Fragment() {
+
+class CatalogF : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Get the custom view for this fragment layout
-        val view = inflater!!.inflate(R.layout.fragment_blank2,container,false)
+        val view = inflater!!.inflate(R.layout.f_catalog,container,false)
 
         // Get the text view widget reference from custom layout
         val tv = view.findViewById<TextView>(R.id.text_view)

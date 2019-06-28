@@ -1,42 +1,60 @@
 package ru.npc_ksb.alfaknd
 
+import android.app.Activity
+import android.app.Application
 import android.util.Log
 import okhttp3.*
 import java.io.IOException
 import java.util.*
-import kotlin.system.exitProcess
+import kotlin.collections.ArrayList
 
 class Session {
-    enum class Status {
-        INIT,
-        READY
-    }
-
     companion object {
-        // const val serverAddress = "http://192.168.43.39:3000"
-        const val serverAddress = "http://192.168.43.39:3000"
-        const val csfrTokenHeaderName = "_csrftoken"
-        const val sessionIdCookieName = "_sessionid"
-        var csrfTokenHeader = ""
-        var sessionIdCookie = ""
+        private const val TAG = "Session"
 
-        fun getCsrfToken(callback: (token: String) -> Unit) {
+        const val serverAddress = "http://192.168.43.112:3000"
+        const val csrfHeader = "_csrftoken"
+        const val sessionIDHeader = "_sessionid"
+
+        private var changeListeners = ArrayList<(logged: Boolean) -> Unit>()
+        private var csrfToken = ""
+        private var sessionID = ""
+
+        var activity: Activity? = null
+
+        private var started = false
+
+
+        fun addAuthChangeListener(listener: (logged: Boolean) -> Unit) {
+            changeListeners.add(listener)
+        }
+
+        fun remAuthChangeListener(listener: (logged: Boolean) -> Unit) {
+            changeListeners.remove(listener)
+        }
+
+        private fun onAuthChange(logged: Boolean) {
+            activity!!.runOnUiThread {
+                for (listener in changeListeners) {
+                    listener(logged)
+                }
+            }
+        }
+
+        private fun getCSRFToken(callback: (token: String) -> Unit) {
             val client = OkHttpClient()
-
             val request = Request.Builder().url("$serverAddress/api/account/device-login/").get().build()
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    Log.d("qwerty", e.message)
+                    Log.d(TAG, e.message)
                     call.cancel()
                 }
 
                 @Throws(IOException::class)
                 override fun onResponse(call: Call, response: Response) {
-                    val headers = response.headers().toString()
-                    Log.d("qwerty", headers)
                     val cookies = response.headers().values("set-cookie")
-                    val pattern = "$csfrTokenHeaderName=([^;]+)".toRegex()
+                    val pattern = "$csrfHeader=([^;]+)".toRegex()
                     cookies.forEach { cookie ->
                         val found = pattern.find(cookie)
                         if (found != null) {
@@ -47,48 +65,87 @@ class Session {
             })
         }
 
-
         fun authCheck() {
-            if (sessionIdCookie == "") {
-                return
-            }
-
             val client = OkHttpClient()
 
             val request = Request.Builder().url("$serverAddress/api/account/login-check/")
-                .addHeader("Cookie", "$sessionIdCookieName=$sessionIdCookie; USER_AUTHORITY_ID=1")
+                .addHeader("Cookie", "$sessionIDHeader=$sessionID")
                 .get()
                 .build()
-            //  .addHeader(csfrTokenHeaderName, csrfTokenHeader)
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    Log.d("qwerty", e.message)
+                    Log.d(TAG, e.message)
                     call.cancel()
                 }
 
                 @Throws(IOException::class)
                 override fun onResponse(call: Call, response: Response) {
                     if (response.code() != 200) {
-                        exitProcess(0)
+                        authLogout()
                     }
                 }
             })
         }
 
-        fun startWorker() {
-            getCsrfToken { token ->
-                csrfTokenHeader = token
-                Log.d("qwerty", "token: $token")
-            }
+        fun authLogout() {
+            sessionID = ""
+            csrfToken = ""
+            onAuthChange(false)
+        }
 
-            val authChecker = object : TimerTask() {
+        fun authWithCode(code: String, callback: (success: Boolean) -> Unit) {
+            val client = OkHttpClient()
+
+            val json = MediaType.parse("application/json; charset=utf-8")
+            val body = RequestBody.create(json, """{ "token": "$code" }""")
+            val request = Request.Builder().url("$serverAddress/api/account/device-login/")
+                .addHeader(csrfHeader, csrfToken)
+                .post(body)
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.d(TAG, e.message)
+                    call.cancel()
+                    callback(false)
+                }
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    val cookies = response.headers().values("set-cookie")
+                    val pattern = "${Session.sessionIDHeader}=([^;]+)".toRegex()
+                    for (cookie in cookies) {
+                        val found = pattern.find(cookie)
+                        if (found != null) {
+                            sessionID = found.groups[1]!!.value
+                            callback(true)
+                            onAuthChange(true)
+                            return
+                        }
+                    }
+                    callback(false)
+                }
+            })
+        }
+
+        fun start() {
+            if (started) return
+            started = true
+
+            val worker = object : TimerTask() {
                 override fun run() {
-                    authCheck()
+                    if (csrfToken == "") {
+                        getCSRFToken { token ->
+                            csrfToken = token
+                        }
+                    } else if (sessionID != "") {
+                        authCheck()
+                    }
                 }
             }
             val timer = Timer()
-            timer.schedule(authChecker, 5000, 5000)
+            timer.schedule(worker, 3000, 3000)
         }
     }
 }
