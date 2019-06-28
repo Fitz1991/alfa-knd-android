@@ -22,7 +22,10 @@ import androidx.lifecycle.ViewModelProviders
 import ru.npc_ksb.alfaknd.models.AppDatabase
 import androidx.room.Room
 import com.google.gson.JsonParser
+import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
@@ -85,8 +88,8 @@ class InspectionsF : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object:DisposableSingleObserver<Datum>() {
-                override fun onSuccess(employee:Datum) {
-                    val data = employee
+                override fun onSuccess(datum:Datum) {
+                    val data = datum
 
                     val isEquals = data.compare(newData)
                     //если данные идентичны
@@ -95,45 +98,54 @@ class InspectionsF : Fragment() {
                     }
                     //если не идентичны, то обновляем
                     else{
-                        alfaKndViewModel.repository.update(newData)
+                        //делаем метод update отслеживаемым, обновляем данные в БД
+                        val updatedDatumId : Flowable<Int> = Flowable.just(alfaKndViewModel.repository.update(newData))
+                            //подписываемся на обновленные данные
+                        updatedDatumId
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(object:DisposableSingleObserver<Int>() {
-                                override fun onSuccess(pk:Int) {
-                                    alfaKndViewModel.repository.getById(newData.pk!!)
-                                        .subscribeOn(Schedulers.io())
-                                        .observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe(object:DisposableSingleObserver<Datum>() {
-                                            override fun onSuccess(updatedData:Datum) {
-                                                Log.d(TAG, "Состояние строки с pk ${data.pk} до: ${jsonParser!!.convertToJson(data)}")
-                                                Log.d(TAG, "Состояние строки с pk ${updatedData.pk} после: ${jsonParser!!.convertToJson(updatedData)}")
+                            .subscribe({
+                            //получаем обновленные данные
+                            alfaKndViewModel.repository.getById(it.toLong())
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(object:DisposableSingleObserver<Datum>() {
+                                    override fun onSuccess(updatedData:Datum) {
+                                        Log.d(TAG, "Состояние строки с pk ${data.pk} до: ${jsonParser!!.convertToJson(data)}")
+                                        Log.d(TAG, "Состояние строки с pk ${updatedData.pk} после: ${jsonParser!!.convertToJson(updatedData)}")
 
-                                            }
-                                            override fun onError(e:Throwable) {
+                                    }
+                                    override fun onError(e:Throwable) {
 
-                                            }
-                                        })
-                                }
-                                override fun onError(e:Throwable) {
-
-                                }
-                            })
+                                    }
+                                })
+                        }, {
+                            Log.d(TAG, it.message)
+                        })
                     }
                 }
                 override fun onError(e:Throwable) {
-                    alfaKndViewModel.insert(newData)
-                    Log.d(TAG, "Данных с pk ${newData.pk} не существует записываем в БД..")
-                    alfaKndViewModel.repository.getById(newData.pk!!)
+                    val insertedDatumId = Flowable.just(alfaKndViewModel.repository.insert(newData))
+                    insertedDatumId
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(object:DisposableSingleObserver<Datum>() {
-                            override fun onSuccess(addedData:Datum) {
-                                Log.d(TAG, "Новые данные объекта с pk ${addedData.pk}: ${jsonParser!!.convertToJson(addedData)}")
-                            }
-                            override fun onError(e:Throwable) {
+                        .subscribe({it ->
+//                            Log.d(TAG, "Данных с pk ${newData.pk} не существует записываем в БД..")
+                            alfaKndViewModel.repository.getById(it)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(object:DisposableSingleObserver<Datum>() {
+                                    override fun onSuccess(addedData:Datum) {
+                                        Log.d(TAG, "Новые данные объекта с pk ${addedData.pk}: ${jsonParser!!.convertToJson(addedData)}")
+                                    }
+                                    override fun onError(e:Throwable) {
 
-                            }
-                        })
+                                    }
+                                })
+                        },
+                            {
+                                Log.d(TAG, it.message)
+                            })
                 }
             })
     }

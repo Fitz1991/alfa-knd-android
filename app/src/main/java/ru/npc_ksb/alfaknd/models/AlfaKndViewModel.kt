@@ -16,7 +16,7 @@ class AlfaKndViewModel(application: Application) : AndroidViewModel(application)
 
     init {
         //создаем БД
-        //datumDao()-поянмяет с какой таблицей работаеем
+        //datumDao()- с какой таблицей работаеем
         val alfaKndDao = AppDatabase.getDatabase(application, viewModelScope).datumDao()
 
         repository = AlfaKndRepository(alfaKndDao)

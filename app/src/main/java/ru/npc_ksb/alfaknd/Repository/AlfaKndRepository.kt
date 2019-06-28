@@ -20,12 +20,12 @@ class AlfaKndRepository(private val datumDao: DatumDao) {
     }
 
     @WorkerThread
-    fun insert(datum: Datum) : Single<Int> {
+    fun insert(datum: Datum) : Long{
         return datumDao.insert(datum)
     }
 
     @WorkerThread
-    fun update(datum: Datum) : Single<Int> {
+    fun update(datum: Datum) : Int {
         return datumDao.update(datum)
     }
 

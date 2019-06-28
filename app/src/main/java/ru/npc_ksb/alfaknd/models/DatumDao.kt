@@ -18,11 +18,11 @@ interface DatumDao {
 
 
     @Insert
-    fun insert(employee:Datum) : Single<Int>
+    fun insert(employee:Datum) : Long
 
 
     @Update
-    fun update(employee: Datum) : Single<Int>
+    fun update(employee: Datum) : Int
 
     @Delete
     fun delete(employee:Datum)
