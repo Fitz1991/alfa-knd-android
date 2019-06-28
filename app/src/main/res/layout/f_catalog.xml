@@ -3,16 +3,16 @@
 			 xmlns:tools="http://schemas.android.com/tools"
 			 android:layout_width="match_parent"
 			 android:layout_height="match_parent"
-			 tools:context=".fragments.BlankFragment1">
+			 tools:context=".views.CatalogF">
 
 	<TextView
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+			android:text="@string/hello_blank_fragment_3"
 			android:id="@+id/text_view"
 			android:textSize="50sp"
 			android:background="@color/colorLinen"
 			android:theme="@style/AppTheme.NoActionBar"
-			android:textColor="@color/colorPrimaryDark"
-			android:text="@string/hello_blank_fragment_1"/>
+			android:textColor="@color/colorPrimaryDark"/>
 
 </FrameLayout>
