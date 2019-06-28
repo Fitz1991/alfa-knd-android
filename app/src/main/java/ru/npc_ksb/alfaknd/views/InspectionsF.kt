@@ -26,7 +26,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-import ru.npc_ksb.alfaknd.Application
 import ru.npc_ksb.alfaknd.models.AlfaKndViewModel
 import ru.npc_ksb.alfaknd.models.Datum
 
