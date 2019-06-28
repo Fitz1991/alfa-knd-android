@@ -13,6 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val intent = Intent(this, WorkActivity::class.java)
+        startActivity(intent)
+        return
+
 
         val progress = this.findViewById<ProgressBar>(R.id.progressBar)
         progress.visibility = View.VISIBLE
