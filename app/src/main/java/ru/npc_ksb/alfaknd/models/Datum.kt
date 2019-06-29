@@ -12,7 +12,7 @@ class Datum{
     @PrimaryKey
     @SerializedName("pk")
     @Expose
-    var pk: Long? = null
+    var pk: Int? = null
     @SerializedName("__str__")
     @Expose
     var str: String? = null

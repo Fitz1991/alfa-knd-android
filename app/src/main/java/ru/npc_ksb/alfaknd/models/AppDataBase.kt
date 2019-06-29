@@ -18,23 +18,30 @@ public abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(context: Context,  scope: CoroutineScope): AppDatabase {
+        fun getDatabase(
+                context: Context,
+                scope: CoroutineScope
+        ): AppDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }
+            //строим БД
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "Word_database"
-                ).fallbackToDestructiveMigration()
-                    .addCallback(AppDatabaseCallback(scope)).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .addCallback(AppDatabaseCallback(scope))
+                    .build()
                 INSTANCE = instance
                 return instance
             }
         }
 
+        //Действия перед построением БД
         private class AppDatabaseCallback(
             private val scope: CoroutineScope
         ) : RoomDatabase.Callback() {

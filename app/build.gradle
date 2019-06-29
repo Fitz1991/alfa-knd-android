@@ -43,15 +43,20 @@ dependencies {
 
     // Room components
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
-    kapt 'android.arch.persistence.room:compiler:1.0.0-alpha1'
-    implementation "android.arch.persistence.room:rxjava2:1.0.0"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    implementation "androidx.room:room-rxjava2:$rootProject.roomVersion"
+
+//    implementation "android.arch.persistence.room:rxjava2:$rootProject.roomVersion"
+//    kapt "android.arch.persistence.room:compiler:$rootProject.roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
     implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.10'
     implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
-    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
-    // Lifecycle components
+
+    // Lifecycle components (LiveData)
+    implementation "android.arch.lifecycle:reactivestreams:1.1.1"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
     kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.androidxArchVersion"

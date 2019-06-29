@@ -21,13 +21,19 @@ class AlfaKndViewModel(application: Application) : AndroidViewModel(application)
 
         repository = AlfaKndRepository(alfaKndDao)
         allDatum = repository.allDatum
+
     }
 
-    fun insert(datum: Datum) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(datum)
-    }
-
-    fun update(datum: Datum) = viewModelScope.launch(Dispatchers.IO) {
-        repository.update(datum)
-    }
+//    fun getById(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+//        repository.getById(id)
+//    }
+//
+//    fun insert(datum: Datum) = viewModelScope.launch(Dispatchers.IO) {
+//        repository.insert(datum)
+//        Log.d(TAG, "datum")
+//    }
+//
+//    fun update(datum: Datum) = viewModelScope.launch(Dispatchers.IO) {
+//        repository.update(datum)
+//    }
 }

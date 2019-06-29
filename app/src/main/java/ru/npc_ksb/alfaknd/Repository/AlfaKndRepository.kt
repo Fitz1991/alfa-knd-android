@@ -13,19 +13,17 @@ class AlfaKndRepository(private val datumDao: DatumDao) {
 
     val allDatum: LiveData<List<Datum>> = datumDao.getAll()
 
-
-    fun getById(id: Long) : Single<Datum> {
+    fun getById(id: Int) : LiveData<Datum>{
         return datumDao.getById(id)
-        Log.d("myLog", "AlfaKndRepository")
     }
 
     @WorkerThread
-    fun insert(datum: Datum) : Long{
+    fun insert(datum: Datum) : Flowable<Long> {
         return datumDao.insert(datum)
     }
 
     @WorkerThread
-    fun update(datum: Datum) : Int {
+    fun update(datum: Datum) : Flowable<Int>{
         return datumDao.update(datum)
     }
 
