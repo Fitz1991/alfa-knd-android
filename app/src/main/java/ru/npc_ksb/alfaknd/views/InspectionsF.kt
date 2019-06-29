@@ -69,8 +69,9 @@ class InspectionsF : Fragment() {
         alfaKndViewModel.allDatum.observe(this, Observer { datas ->
             // Обновляем данные при изменении БД
             datas?.let {
+                Log.d(TAG, "ВСЕ ДАННЫЕ ИЗ ТАБЛИЦЫ DATUM :")
                 for (datum in datas)
-                    Log.d(TAG, "Все данные из таблицы datum : ${jsonParser!!.convertToJson(datum)}")
+                    Log.d(TAG, "${jsonParser!!.convertToJson(datum)}")
             }
         })
 
@@ -87,38 +88,37 @@ class InspectionsF : Fragment() {
 
     fun insertNewData(newData: Datum) {
         //проверяем есть ли уже данные в БД с newData.pk
-        val liveDataDatum : LiveData<Datum> = alfaKndViewModel.repository.getById(newData.pk!!)
-        val flowableDataDatum: Flowable<Datum> = Flowable.fromPublisher(LiveDataReactiveStreams.toPublisher(this, liveDataDatum))
-        flowableDataDatum
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
+        newData.pk?.let {
+            alfaKndViewModel.repository.getById(it)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
                         //если есть данные в БД с newData.pk
                         {
                             val data = it
                             val isEquals = data.compare(newData)
                             //если данные идентичны
                             if (isEquals == 0) {
-                                Log.d(TAG, "Обновлять нечего")
+                                Log.d(TAG, "ОБНОВЛЯТЬ НЕЧЕГО")
                             }
                             //если не идентичны, то обновляем
                             else {
                                 //делаем метод update наблюдаемым, обновляем данные в БД
-                                val flowableDataUpdated : Flowable<Int> = alfaKndViewModel.repository.update(newData)
-                                flowableDataUpdated
-                                //подписываемся на обновленные данные
+                                Completable.fromAction {
+                                    alfaKndViewModel.repository.update(newData)
+                                }
+                                        //подписываемся на обновленные данные
                                         .subscribeOn(Schedulers.newThread())
                                         .observeOn(AndroidSchedulers.mainThread())
                                         .subscribe({
                                             //получаем обновленные данные
-                                            val liveDataDatum : LiveData<Datum> = alfaKndViewModel.repository.getById(it)
-                                            val flowableData: Flowable<Datum> = Flowable.fromPublisher(LiveDataReactiveStreams.toPublisher(this, liveDataDatum))
-                                            flowableData
+                                            alfaKndViewModel.repository.getById(newData.pk!!)
                                                     .subscribeOn(Schedulers.newThread())
                                                     .observeOn(AndroidSchedulers.mainThread())
                                                     .subscribe({
-                                                        Log.d(TAG, "Состояние строки с pk ${data.pk} до: ${jsonParser!!.convertToJson(data)}")
-                                                            Log.d(TAG, "Состояние строки с pk ${it.pk} после: ${jsonParser!!.convertToJson(it)}")
+                                                        Log.d(TAG, "ОБНОВЛЯЕМ ДАННЫЕ...")
+                                                        Log.d(TAG, "СОСТОЯНИЕ СТРОКИ С PK ${data.pk} ДО: ${jsonParser!!.convertToJson(data)}")
+                                                        Log.d(TAG, "СОСТОЯНИЕ СТРОКИ С PK ${it.pk} ПОСЛЕ: ${jsonParser!!.convertToJson(it)}")
                                                     }, {
                                                         Log.d(TAG, it.message)
                                                     })
@@ -129,29 +129,29 @@ class InspectionsF : Fragment() {
                         },
                         {
                             //если не нашли данные с newData.pk
-                            val flowableDataDatumId : Flowable<Long> = alfaKndViewModel.repository.insert(newData)
-                                flowableDataDatumId
-//                                    .subscribeOn(Schedulers.newThread())
-//                                    .observeOn(AndroidSchedulers.mainThread())
+                            Completable.fromAction {alfaKndViewModel.repository.insert(newData)}
+                                    .subscribeOn(Schedulers.newThread())
+                                    .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe({
-                                        Log.d(TAG, "Данных с pk ${newData.pk} не существует записываем в БД..")
-                                        val liveDataDatum : LiveData<Datum> = alfaKndViewModel.repository.getById(it.toInt())
-                                        val flowableDataDatum: Flowable<Datum> = Flowable.fromPublisher(LiveDataReactiveStreams.toPublisher(this, liveDataDatum))
-                                        flowableDataDatum
-                                                .subscribeOn(Schedulers.newThread())
-                                                .observeOn(AndroidSchedulers.mainThread())
-                                                .subscribe(
-                                                        {
-                                                            Log.d(TAG, "Новые данные объекта с pk ${it.pk}: ${jsonParser!!.convertToJson(it)}")
-                                                        }, {
+                                        Log.d(TAG, "ДАННЫХ С PK ${newData.pk} НЕ СУЩЕСТВУЕТ, ЗАПИСЫВАЕМ В БД..")
+                                        alfaKndViewModel.repository.getById(newData.pk!!)
+                                            .subscribeOn(Schedulers.newThread())
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .subscribe(
+                                                {
+                                                    Log.d(TAG, "НОВЫЕ ДАННЫЕ ОБЪЕКТА С PK ${it.pk}: ${jsonParser!!.convertToJson(it)}")
+                                                },
+                                                {
 
                                                 }
-                                                )},
-                                            {
-                                                Log.d(TAG, it.message)
-                                            })
+                                            )
+                                    },
+                                    {
+                                        Log.d(TAG, it.message)
+                                    })
                         }
-                )
+                    )
+        }
     }
 
 

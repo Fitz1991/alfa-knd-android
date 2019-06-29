@@ -14,15 +14,15 @@ interface DatumDao {
 
 
     @Query("SELECT * FROM datum WHERE pk = :id")
-    fun getById(id: Int): LiveData<Datum>
+    fun getById(id: Int): Single<Datum>
 
 
-    @Insert
-    fun insert(employee:Datum) : Flowable<Long>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(employee:Datum) : Long
 
 
-    @Update
-    fun update(employee: Datum) : Flowable<Int>
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun update(employee: Datum) : Int
 
     @Delete
     fun delete(employee:Datum)

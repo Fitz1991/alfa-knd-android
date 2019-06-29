@@ -1,10 +1,7 @@
-package ru.npc_ksb.alfaknd.Repository
+package ru.npc_ksb.alfaknd.repository
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Single
 import ru.npc_ksb.alfaknd.models.Datum
 import ru.npc_ksb.alfaknd.models.DatumDao
@@ -13,17 +10,17 @@ class AlfaKndRepository(private val datumDao: DatumDao) {
 
     val allDatum: LiveData<List<Datum>> = datumDao.getAll()
 
-    fun getById(id: Int) : LiveData<Datum>{
+    fun getById(id: Int) : Single<Datum> {
         return datumDao.getById(id)
     }
 
     @WorkerThread
-    fun insert(datum: Datum) : Flowable<Long> {
+    fun insert(datum: Datum) : Long {
         return datumDao.insert(datum)
     }
 
     @WorkerThread
-    fun update(datum: Datum) : Flowable<Int>{
+    fun update(datum: Datum) : Int{
         return datumDao.update(datum)
     }
 

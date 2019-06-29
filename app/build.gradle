@@ -53,10 +53,10 @@ dependencies {
 
     implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.10'
     implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
-
+//
 
     // Lifecycle components (LiveData)
-    implementation "android.arch.lifecycle:reactivestreams:1.1.1"
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
     kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.androidxArchVersion"
