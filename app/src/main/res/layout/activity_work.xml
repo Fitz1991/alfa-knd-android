@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:fitsSystemWindows="true"
-	tools:context=".WorkActivity">
+	tools:context=".presentation_layer.view.activites.WorkActivity">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -32,7 +32,7 @@
 				android:id="@+id/sidebar_layout">
 
 				<fragment
-					android:name="ru.npc_ksb.alfaknd.sidebar.SidebarFragment"
+					android:name="ru.npc_ksb.alfaknd.presentation_layer.view.sidebar.SidebarFragment"
 					android:layout_width="@dimen/sidebar_width"
 					android:layout_height="match_parent"
 					android:clickable="true"

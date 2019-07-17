@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="ru.npc_ksb.alfaknd">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ru.npc_ksb.alfaknd">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <application android:icon="@mipmap/ic_alfaknd"
-                 android:label="@string/app_name"
-                 android:supportsRtl="true"
-                 android:theme="@style/AppTheme"
-                 tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+    <application
+        android:name=".presentation_layer.view.MainApp"
+        android:icon="@mipmap/ic_alfaknd"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name=".MainActivity"
-                  android:screenOrientation="landscape"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".presentation_layer.view.activites.MainActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".WorkActivity"
-                  android:screenOrientation="landscape"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".presentation_layer.view.activites.WorkActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".QRCodeActivity"
-                  android:screenOrientation="landscape"
-                  android:theme="@style/AppTheme.FullScreen"/>
+        <activity
+            android:name=".presentation_layer.view.activites.QRCodeActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.FullScreen" />
 
     </application>
 </manifest>

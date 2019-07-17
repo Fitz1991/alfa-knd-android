@@ -27,8 +27,11 @@ task clean(type: Delete) {
 }
 
 ext {
-    roomVersion = "2.1.0"
+    roomVersion = "2.1.0-alpha05"
     archLifecycleVersion = "2.2.0-alpha01"
     androidxArchVersion = "2.1.0-alpha02"
     coroutines = "1.2.2"
+    dagger = "2.23.2"
+    retrofit2 = "2.6.0"
+    streamApi = "1.2.1"
 }
