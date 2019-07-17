@@ -1,0 +1,165 @@
+{
+  "paginator": {
+    "count": 5785,
+    "total_count": 5785,
+    "page": 1,
+    "num_pages": 579,
+    "page_size": 10,
+    "start_index": 1,
+    "end_index": 10
+  },
+  "data": [
+    {
+      "uuid": 6,
+      "__str__": "ООО \"АЛЗАээээ\"",
+      "inn": "2127311850",
+      "address": "428000, ЧУВАШИЯ ЧУВАШСКАЯ РЕСПУБЛИКА -, ГОРОД ЧЕБОКСАРЫ, УЛИЦА ГАГАРИНА Ю., ДОМ 55",
+      "ogrn": "1022100974433",
+      "subject_type": 1,
+      "name": "ООО \"АЛЗА\"",
+      "change_number": 5
+    },
+    {
+      "uuid": 7,
+      "__str__": "ООО «Агентство по недвижимости «Честррррр2»",
+      "inn": "2127321168",
+      "address": "428020, Чувашская Республика, Город Чебоксары, Улица Петрова, 6",
+      "ogrn": "1022100966216",
+      "subject_type": 1,
+      "name": "ООО «Агентство по недвижимости «Честр2»",
+      "change_number": 3
+    },
+    {
+      "uuid": 8,
+      "__str__": "Администрация Алатырского района",
+      "inn": "2101001269",
+      "address": "429810, ЧУВАШИЯ ЧУВАШСКАЯ РЕСПУБЛИКА -, РАЙОН АЛАТЫРСКИЙ, СЕЛО ЧУВАРЛЕИ, УЛИЦА ВОРОШИЛОВА, ДОМ ДОМ 144",
+      "ogrn": "1022101629010",
+      "subject_type": 1,
+      "name": "Администрация Алатырского района",
+      "change_number": 4
+    },
+    {
+      "uuid": 9,
+      "__str__": "Администрация Чурачикского сельского поселения Цивильского района Чувашской Республики",
+      "inn": "2115903235",
+      "address": "429914, Чувашская Республика, Цивильский Район, Село Чурачики, 3, 2",
+      "ogrn": "1022102831035",
+      "subject_type": 1,
+      "name": "Администрация Чурачикского сельского поселения Цивильского района Чувашской Республики",
+      "change_number": 6
+    }
+  ],
+  "meta": {
+    "fields": [
+      {
+        "name": "__str__",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "",
+        "read_only": true,
+        "write_only": false,
+        "label": "Наименование",
+        "allow_null": false,
+        "allow_blank": false,
+        "initial": ""
+      },
+      {
+        "name": "inn",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "",
+        "read_only": true,
+        "write_only": false,
+        "label": "ИНН",
+        "allow_null": false,
+        "allow_blank": false,
+        "initial": ""
+      },
+      {
+        "name": "address",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "",
+        "read_only": true,
+        "write_only": false,
+        "label": "Адрес",
+        "allow_null": false,
+        "allow_blank": false,
+        "initial": ""
+      },
+      {
+        "name": "ogrn",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "",
+        "read_only": true,
+        "write_only": false,
+        "label": "ОГРН/ОГРНИП",
+        "allow_null": false,
+        "allow_blank": false,
+        "initial": ""
+      },
+      {
+        "name": "subject_type",
+        "type": "choice",
+        "meta": {},
+        "required": true,
+        "ordering": "subject_type",
+        "read_only": false,
+        "write_only": false,
+        "label": "Вид субъекта",
+        "allow_null": false,
+        "allow_blank": false,
+        "choices": [[1, "ЮЛ"], [2, "ИП"]]
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "name",
+        "read_only": false,
+        "write_only": false,
+        "label": "Сокращенное наименование",
+        "max_length": 1024,
+        "allow_null": true,
+        "allow_blank": true,
+        "initial": ""
+      }
+    ],
+    "filter_fields": ["subject_type"],
+    "extra_detail_actions": ["delete_confirm", "restore"],
+    "extra_list_actions": [
+      "import_file",
+      "import_file_rusprofile",
+      "obfuscate",
+      "selected",
+      "selected_delete",
+      "selected_delete_restore",
+      "selected_restore",
+      "sort"
+    ],
+    "permissions": {
+      "sort": false,
+      "selected": true,
+      "destroy": true,
+      "read": true,
+      "update": true,
+      "import_rusprofile": true,
+      "restore": true,
+      "list": true,
+      "import": true,
+      "retrieve": true,
+      "selectedapply": true,
+      "obfuscate": true,
+      "create": true,
+      "search": true,
+      "filter": true
+    }
+  }
+}

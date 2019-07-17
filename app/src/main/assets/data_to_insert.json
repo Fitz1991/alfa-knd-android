@@ -1,0 +1,145 @@
+{
+  "paginator": {
+    "count": 5785,
+    "total_count": 5785,
+    "page": 1,
+    "num_pages": 579,
+    "page_size": 10,
+    "start_index": 1,
+    "end_index": 10
+  },
+  "data": [
+     {  
+      "pk": 67,
+      "__str__": "Администрация Ямашевского сельского поселения Канашского района",
+      "inn": "2106006648",
+      "address": "429313, ЧУВАШИЯ ЧУВАШСКАЯ РЕСПУБЛИКА -, РАЙОН КАНАШСКИЙ, СЕЛО ЯМАШЕВО, УЛИЦА СЕРГЕЕВА, ДОМ 11",
+      "ogrn": "1052134014723",
+      "subject_type": 1,
+      "name": "Администрация Ямашевского сельского поселения Канашского района",
+      "change_number": 3
+    },
+     {
+      "pk": 68,
+      "__str__": "Администрация Ямашевского сельского поселения Канашского района",
+      "inn": "2106006648",
+      "address": "429313, ЧУВАШИЯ ЧУВАШСКАЯ РЕСПУБЛИКА -, РАЙОН КАНАШСКИЙ, СЕЛО ЯМАШЕВО, УЛИЦА СЕРГЕЕВА, ДОМ 11",
+      "ogrn": "1052134014723",
+      "subject_type": 1,
+      "name": "Администрация Ямашевского сельского поселения Канашского района",
+      "change_number": 3
+    }
+  ],
+  "meta": {
+    "fields": [
+      {
+        "name": "__str__",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "",
+        "read_only": true,
+        "write_only": false,
+        "label": "Наименование",
+        "allow_null": false,
+        "allow_blank": false,
+        "initial": ""
+      },
+      {
+        "name": "inn",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "",
+        "read_only": true,
+        "write_only": false,
+        "label": "ИНН",
+        "allow_null": false,
+        "allow_blank": false,
+        "initial": ""
+      },
+      {
+        "name": "address",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "",
+        "read_only": true,
+        "write_only": false,
+        "label": "Адрес",
+        "allow_null": false,
+        "allow_blank": false,
+        "initial": ""
+      },
+      {
+        "name": "ogrn",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "",
+        "read_only": true,
+        "write_only": false,
+        "label": "ОГРН/ОГРНИП",
+        "allow_null": false,
+        "allow_blank": false,
+        "initial": ""
+      },
+      {
+        "name": "subject_type",
+        "type": "choice",
+        "meta": {},
+        "required": true,
+        "ordering": "subject_type",
+        "read_only": false,
+        "write_only": false,
+        "label": "Вид субъекта",
+        "allow_null": false,
+        "allow_blank": false,
+        "choices": [[1, "ЮЛ"], [2, "ИП"]]
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "meta": {},
+        "required": false,
+        "ordering": "name",
+        "read_only": false,
+        "write_only": false,
+        "label": "Сокращенное наименование",
+        "max_length": 1024,
+        "allow_null": true,
+        "allow_blank": true,
+        "initial": ""
+      }
+    ],
+    "filter_fields": ["subject_type"],
+    "extra_detail_actions": ["delete_confirm", "restore"],
+    "extra_list_actions": [
+      "import_file",
+      "import_file_rusprofile",
+      "obfuscate",
+      "selected",
+      "selected_delete",
+      "selected_delete_restore",
+      "selected_restore",
+      "sort"
+    ],
+    "permissions": {
+      "sort": false,
+      "selected": true,
+      "destroy": true,
+      "read": true,
+      "update": true,
+      "import_rusprofile": true,
+      "restore": true,
+      "list": true,
+      "import": true,
+      "retrieve": true,
+      "selectedapply": true,
+      "obfuscate": true,
+      "create": true,
+      "search": true,
+      "filter": true
+    }
+  }
+}
